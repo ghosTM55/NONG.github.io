@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Nong Studio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A professional website for Nong Studio, a filming studio that integrates AI technologies into traditional documentary and video production.
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+Nong Studio represents a new frontier in filmmaking, where traditional documentary techniques meet cutting-edge AI technologies. The name NONG stands for "Native Optics Neural Grain" - embodying our commitment to preserving the organic, human essence of storytelling while enhancing it with neural network technologies.
 
-### `npm start`
+This website serves as a landing page to introduce Nong Studio, its mission, services, and provide a way for potential clients to get in touch.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Responsive design that works across all device sizes
+- Modern, creative aesthetic with unique visual elements
+- Smooth animations and transitions for enhanced user experience
+- Contact form with validation
+- Optimized for search engines and social sharing
 
-### `npm test`
+## Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Framework**: React.js
+- **Styling**: CSS with custom variables for consistent design
+- **Deployment**: GitHub Pages
+- **Domain**: Custom domain (nong.studio)
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+nong-studio/
+├── public/                 # Static assets
+│   ├── favicon.svg        # Site favicon
+│   ├── logo.svg           # Nong Studio logo
+│   ├── og-image.svg       # Open Graph image for social sharing
+│   ├── CNAME              # Custom domain configuration
+│   ├── sitemap.xml        # Site map for SEO
+│   ├── robots.txt         # Robots configuration
+│   ├── manifest.json      # Web app manifest
+│   └── index.html         # HTML template
+│
+├── src/                    # Source code
+│   ├── components/        # React components
+│   │   ├── Header/        # Site header and navigation
+│   │   ├── Footer/        # Site footer
+│   │   ├── HeroSection/   # Hero section with logo and slogan
+│   │   ├── AboutSection/  # About section with mission and values
+│   │   ├── ServicesSection/ # Services offered by the studio
+│   │   └── ContactSection/ # Contact form and information
+│   │
+│   ├── styles/            # Global styles
+│   │   ├── variables.css  # CSS variables for design system
+│   │   └── global.css     # Global styles and utilities
+│   │
+│   ├── assets/            # Assets used in the application
+│   │   └── images/        # Image assets
+│   │
+│   ├── App.js             # Main application component
+│   ├── App.css            # Application-specific styles
+│   ├── index.js           # Application entry point
+│   └── index.css          # Entry point styles
+│
+├── package.json           # Project dependencies and scripts
+└── README.md              # Project documentation
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- Node.js (v14 or later)
+- npm or yarn
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/nong-studio.git
+   cd nong-studio
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Start the development server:
+   ```
+   npm start
+   ```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The website is configured to deploy to GitHub Pages. To deploy:
 
-### `npm run build` fails to minify
+1. Update the `homepage` field in `package.json` with your GitHub Pages URL or custom domain.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Run the deploy script:
+   ```
+   npm run deploy
+   ```
+
+## Future Enhancements
+
+- Portfolio/Demo section to showcase completed projects
+- Blog or news section for updates
+- Team member profiles
+- More detailed information about AI integration in filmmaking
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For any inquiries about this project, please contact:
+- Email: info@nong.studio

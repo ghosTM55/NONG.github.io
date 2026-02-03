@@ -1,0 +1,112 @@
+:root {
+  /* Primary Colors */
+  --primary-dark: #1A1A2E;     /* Deep blue-black for backgrounds */
+  --primary-main: #16213E;     /* Rich navy blue for primary elements */
+  --primary-light: #0F3460;    /* Vibrant blue for accents */
+
+  /* Secondary Colors */
+  --secondary-dark: #541690;   /* Deep purple for creative accents */
+  --secondary-main: #8B1874;   /* Rich magenta for highlights */
+  --secondary-light: #FF5E9A;  /* Vibrant pink for call-to-action elements */
+
+  /* Neutral Colors */
+  --neutral-100: #FFFFFF;      /* White */
+  --neutral-200: #F5F5F5;      /* Light gray for backgrounds */
+  --neutral-300: #E0E0E0;      /* Light gray for borders */
+  --neutral-400: #BDBDBD;      /* Medium gray for disabled states */
+  --neutral-500: #9E9E9E;      /* Medium gray for secondary text */
+  --neutral-600: #757575;      /* Dark gray for body text */
+  --neutral-700: #616161;      /* Dark gray for important text */
+  --neutral-800: #424242;      /* Very dark gray for headings */
+  --neutral-900: #212121;      /* Nearly black for primary headings */
+
+  /* Accent Colors */
+  --accent-success: #4CAF50;   /* Green for success states */
+  --accent-warning: #FFC107;   /* Amber for warning states */
+  --accent-error: #F44336;     /* Red for error states */
+  --accent-info: #2196F3;      /* Blue for information states */
+
+  /* Typography */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --font-accent: 'Playfair Display', serif;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Spacing */
+  --spacing-unit: 0.25rem;  /* 4px */
+  --space-0: 0;
+  --space-1: var(--spacing-unit);
+  --space-2: calc(var(--spacing-unit) * 2);
+  --space-3: calc(var(--spacing-unit) * 3);
+  --space-4: calc(var(--spacing-unit) * 4);
+  --space-5: calc(var(--spacing-unit) * 5);
+  --space-6: calc(var(--spacing-unit) * 6);
+  --space-8: calc(var(--spacing-unit) * 8);
+  --space-10: calc(var(--spacing-unit) * 10);
+  --space-12: calc(var(--spacing-unit) * 12);
+  --space-16: calc(var(--spacing-unit) * 16);
+  --space-20: calc(var(--spacing-unit) * 20);
+  --space-24: calc(var(--spacing-unit) * 24);
+  --space-32: calc(var(--spacing-unit) * 32);
+  --space-40: calc(var(--spacing-unit) * 40);
+  --space-48: calc(var(--spacing-unit) * 48);
+  --space-56: calc(var(--spacing-unit) * 56);
+  --space-64: calc(var(--spacing-unit) * 64);
+
+  /* Border Radius */
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* Transitions */
+  --transition-default: 0.3s ease-in-out;
+  --transition-fast: 0.15s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+
+  /* Breakpoints */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}

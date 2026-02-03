@@ -1,0 +1,16 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#1A1A2E"/>
+  <rect x="50" y="50" width="1100" height="530" rx="20" stroke="#0F3460" stroke-width="4"/>
+  
+  <!-- Background pattern -->
+  <g opacity="0.1">
+    <circle cx="200" cy="200" r="100" fill="#541690"/>
+    <circle cx="1000" cy="430" r="150" fill="#8B1874"/>
+  </g>
+  
+  <!-- Logo and text -->
+  <text x="600" y="250" font-family="Arial, sans-serif" font-weight="bold" font-size="80" fill="white" text-anchor="middle">NONG STUDIO</text>
+  <text x="600" y="320" font-family="Arial, sans-serif" font-style="italic" font-size="36" fill="#FF5E9A" text-anchor="middle">Native Optics Neural Grain</text>
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="24" fill="#E0E0E0" text-anchor="middle">Professional filming studio merging traditional documentary</text>
+  <text x="600" y="440" font-family="Arial, sans-serif" font-size="24" fill="#E0E0E0" text-anchor="middle">techniques with cutting-edge AI technologies</text>
+</svg>
