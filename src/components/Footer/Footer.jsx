@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-logo">
-            <h3 className="footer-logo-text">NONG STUDIO</h3>
+            <h3 className="footer-logo-text">NONG Studio</h3>
             <p className="footer-tagline">Native Optics Neural Grain</p>
           </div>
           
@@ -20,14 +20,14 @@ const Footer = () => {
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="mailto:contact@nong.studio?subject=NONG%20Studio%20business%20inquiry">Contact</a></li>
               </ul>
             </div>
             
             <div className="footer-links-column">
               <h4>Contact</h4>
               <ul>
-                <li><a href="mailto:info@nong.studio">info@nong.studio</a></li>
+                <li><a href="mailto:contact@nong.studio?subject=NONG%20Studio%20business%20inquiry">contact@nong.studio</a></li>
                 <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
               </ul>
             </div>
@@ -51,7 +51,7 @@ const Footer = () => {
         
         <div className="footer-bottom">
           <p className="copyright">
-            &copy; {currentYear} NONG STUDIO. All rights reserved.
+            &copy; {currentYear} NONG Studio. All rights reserved.
           </p>
           <p className="footer-legal">
             <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a>

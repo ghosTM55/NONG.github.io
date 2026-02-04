@@ -1,13 +1,13 @@
 :root {
   /* Primary Colors */
-  --primary-dark: #1A1A2E;     /* Deep blue-black for backgrounds */
-  --primary-main: #16213E;     /* Rich navy blue for primary elements */
-  --primary-light: #0F3460;    /* Vibrant blue for accents */
+  --primary-dark: #004D40;     /* Deep dark green for backgrounds */
+  --primary-main: #00695C;     /* Rich dark green for primary elements */
+  --primary-light: #00796B;    /* Medium dark green for accents */
 
   /* Secondary Colors */
-  --secondary-dark: #541690;   /* Deep purple for creative accents */
-  --secondary-main: #8B1874;   /* Rich magenta for highlights */
-  --secondary-light: #FF5E9A;  /* Vibrant pink for call-to-action elements */
+  --secondary-dark: #B8860B;   /* Dark gold for hover states */
+  --secondary-main: #DAA520;   /* Golden yellow for highlights */
+  --secondary-light: #FFD700;  /* Bright gold for call-to-action elements */
 
   /* Neutral Colors */
   --neutral-100: #FFFFFF;      /* White */

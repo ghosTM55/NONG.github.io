@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import HeroSection from './components/HeroSection/HeroSection';
 import AboutSection from './components/AboutSection/AboutSection';
 import ServicesSection from './components/ServicesSection/ServicesSection';
-import ContactSection from './components/ContactSection/ContactSection';
+// ContactSection temporarily removed
 import Footer from './components/Footer/Footer';
 
 function App() {
@@ -22,7 +22,6 @@ function App() {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <ContactSection />
       </main>
       <Footer />
     </div>

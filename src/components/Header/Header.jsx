@@ -56,7 +56,7 @@ const Header = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#contact" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                <a href="mailto:contact@nong.studio?subject=NONG%20Studio%20business%20inquiry" className="nav-link" onClick={() => setIsMobileMenuOpen(false)}>
                   Contact
                 </a>
               </li>

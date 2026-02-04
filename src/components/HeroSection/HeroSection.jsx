@@ -20,7 +20,7 @@ const HeroSection = () => {
             Professional filming studio merging traditional documentary techniques with cutting-edge AI technologies
           </p>
           <div className="hero-cta">
-            <a href="#contact" className="btn btn-primary">Get In Touch</a>
+            <a href="mailto:contact@nong.studio?subject=NONG%20Studio%20business%20inquiry" className="btn btn-primary">Get In Touch</a>
             <a href="#services" className="btn btn-secondary">Our Services</a>
           </div>
         </div>

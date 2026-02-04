@@ -47,7 +47,7 @@ const ServicesSection = () => {
         <h2 className="section-title">Our Services</h2>
         
         <p className="services-intro">
-          At NONG STUDIO, we offer a comprehensive range of professional filming services enhanced by cutting-edge AI technologies. Our unique approach combines traditional filmmaking expertise with innovative neural processing to deliver exceptional visual storytelling.
+          At NONG Studio, we offer a comprehensive range of professional filming services enhanced by cutting-edge AI technologies. Our unique approach combines traditional filmmaking expertise with innovative neural processing to deliver exceptional visual storytelling.
         </p>
         
         <div className="services-grid">
@@ -63,7 +63,7 @@ const ServicesSection = () => {
         
         <div className="services-cta">
           <p>Looking for a custom solution for your project?</p>
-          <a href="#contact" className="btn btn-primary">Get In Touch</a>
+          <a href="mailto:contact@nong.studio?subject=NONG%20Studio%20business%20inquiry" className="btn btn-primary">Get In Touch</a>
         </div>
       </div>
     </section>
