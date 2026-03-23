@@ -1,59 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1A1A2E" />
-    <meta
-      name="description"
-      content="NONG Studio - Native Optics Neural Grain. Professional filming studio merging traditional documentary techniques with cutting-edge AI technologies."
-    />
-    <meta name="keywords" content="filming studio, AI filmmaking, documentary, video production, professional filming, neural grain, NONG Studio" />
-    <meta name="author" content="NONG Studio" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nong.studio/" />
-    <meta property="og:title" content="NONG Studio - Native Optics Neural Grain" />
-    <meta property="og:description" content="Professional filming studio merging traditional documentary techniques with cutting-edge AI technologies." />
-    <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://nong.studio/" />
-    <meta property="twitter:title" content="NONG Studio - Native Optics Neural Grain" />
-    <meta property="twitter:description" content="Professional filming studio merging traditional documentary techniques with cutting-edge AI technologies." />
-    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NONG Studio — Opening Soon</title>
+<meta name="description" content="Native Optics Neural Grain — Opening Soon">
+<meta name="keywords" content="filming studio, AI filmmaking, documentary, video production, professional filming, neural grain, NONG Studio">
+<meta name="author" content="NONG Studio">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>NONG Studio - Native Optics Neural Grain</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nong.studio/">
+<meta property="og:title" content="NONG Studio — Opening Soon">
+<meta property="og:description" content="Native Optics Neural Grain — Opening Soon">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://nong.studio/">
+<meta property="twitter:title" content="NONG Studio — Opening Soon">
+<meta property="twitter:description" content="Native Optics Neural Grain — Opening Soon">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/logo192.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8e0d8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  .viewport {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .viewport iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: hue-rotate(90deg) saturate(1.2);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.70);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  /* ── Text content ── */
+  .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    user-select: none;
+  }
+
+  /* "Opening Soon" badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 2.6rem;
+    padding: 0.38rem 1.1rem;
+    border: 1px solid rgba(200, 149, 108, 0.35);
+    border-radius: 2px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(200, 149, 108, 0.75);
+  }
+
+  .badge::before {
+    content: '';
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(200, 149, 108, 0.75);
+    animation: dot-pulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 1;   transform: scale(1);   }
+    50%       { opacity: 0.3; transform: scale(0.75); }
+  }
+
+  .brand {
+    font-size: clamp(3rem, 10vw, 5.8rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #e8c87c;
+    line-height: 1;
+    margin-bottom: 1.3rem;
+  }
+
+  /* Slogan */
+  .slogan {
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .gi { color: #e8c87c; }
+</style>
+</head>
+<body>
+
+<section class="viewport">
+  <iframe id="shader"></iframe>
+
+  <div class="overlay">
+    <div class="content">
+      <div class="badge">Opening Soon</div>
+      <h1 class="brand">NONG Studio</h1>
+      <p class="slogan"><span class="gi">N</span>ative <span class="gi">O</span>ptics &nbsp;&nbsp; <span class="gi">N</span>eural <span class="gi">G</span>rain</p>
+    </div>
+  </div>
+</section>
+
+<script>
+document.getElementById('shader').srcdoc = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sequin Wave</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+(function () {
+  var canvas = document.getElementById('canvas');
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var gl = canvas.getContext('webgl', { alpha: false, antialias: false, preserveDrawingBuffer: false });
+  if (!gl) return;
+
+  var WAVE_SPEED        = 0.8;
+  var SPARKLE_INTENSITY = 1.0;
+
+  var vertSrc = [
+    'attribute vec2 a_pos;',
+    'void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }'
+  ].join('\\n');
+
+  var fragSrc = [
+    'precision highp float;',
+    '',
+    'uniform float u_time;',
+    'uniform vec2  u_res;',
+    'uniform float u_waveSpeed;',
+    'uniform float u_sparkle;',
+    'uniform vec2  u_mouse;',
+    '',
+    '#define PI    3.14159265359',
+    '#define TAU   6.28318530718',
+    '#define SQRT3 1.7320508',
+    '',
+    '// ── Hash functions ──',
+    'float hash21(vec2 p) {',
+    '  p = fract(p * vec2(233.34, 851.73));',
+    '  p += dot(p, p + 23.45);',
+    '  return fract(p.x * p.y);',
+    '}',
+    'vec2 hash22(vec2 p) {',
+    '  float n = hash21(p);',
+    '  return vec2(n, hash21(p + n * 47.0));',
+    '}',
+    '',
+    '// ── Hexagonal tiling ──',
+    'vec4 hexTile(vec2 p, float scale) {',
+    '  p *= scale;',
+    '  vec2 s     = vec2(1.0, SQRT3);',
+    '  vec2 halfS = s * 0.5;',
+    '  vec2 aBase  = floor(p / s);',
+    '  vec2 aLocal = mod(p, s) - halfS;',
+    '  vec2 pOff   = p - halfS;',
+    '  vec2 bBase  = floor(pOff / s);',
+    '  vec2 bLocal = mod(pOff, s) - halfS;',
+    '  float dA   = dot(aLocal, aLocal);',
+    '  float dB   = dot(bLocal, bLocal);',
+    '  float pick = step(dA, dB);',
+    '  vec2 localCoord = mix(bLocal, aLocal, pick);',
+    '  vec2 cellId     = mix(bBase + vec2(0.5), aBase, pick);',
+    '  return vec4(localCoord, cellId);',
+    '}',
+    '',
+    '// ── Wave field ──',
+    'float waveField(vec2 cellPos, float t) {',
+    '  float w = 0.0;',
+    '  w += sin(dot(cellPos, vec2(0.7, 0.5)) * 3.5 - t * 2.8) * 0.35;',
+    '  w += sin(cellPos.x * 4.2 + t * 1.9) * 0.25;',
+    '  float r1 = length(cellPos - vec2(-0.3, 0.2));',
+    '  w += sin(r1 * 6.0 - t * 3.2) * 0.2 * smoothstep(1.2, 0.0, r1);',
+    '  w += sin(dot(cellPos, vec2(-0.4, 0.8)) * 2.8 - t * 1.5) * 0.2;',
+    '  float r2 = length(cellPos - vec2(0.4, -0.3));',
+    '  w += sin(r2 * 5.0 - t * 2.4) * 0.15 * smoothstep(1.0, 0.0, r2);',
+    '  return w;',
+    '}',
+    '',
+    '// ── Dot-matrix segment: nearest dot along a line segment ──',
+    '// Returns brightness [0,1] for a dot-matrix rendered segment.',
+    'float dotSegment(vec2 p, vec2 a, vec2 b, float spacing, float dotR) {',
+    '  vec2  ab     = b - a;',
+    '  float segLen = length(ab);',
+    '  vec2  abN    = ab / segLen;',
+    '  float t      = clamp(dot(p - a, abN), 0.0, segLen);',
+    '  // round() not in GLSL ES 1.0 — use floor(x+0.5)',
+    '  float tSnap  = clamp(floor(t / spacing + 0.5) * spacing, 0.0, segLen);',
+    '  float d      = length(p - (a + abN * tSnap));',
+    '  return smoothstep(dotR, dotR * 0.25, d);',
+    '}',
+    '',
+    '// ── Specular for a tilted sequin disc ──',
+    'float sequinSpecular(float tiltAngle, float tiltDir) {',
+    '  float ct = cos(tiltAngle);',
+    '  float st = sin(tiltAngle);',
+    '  float cd = cos(tiltDir);',
+    '  float sd = sin(tiltDir);',
+    '  vec3 N  = vec3(st * cd, st * sd, ct);',
+    '  vec3 L  = normalize(vec3(0.4, 0.6, 0.9));',
+    '  vec3 V  = vec3(0.0, 0.0, 1.0);',
+    '  vec3 R  = reflect(-L, N);',
+    '  float spec  = pow(max(dot(R, V), 0.0), 48.0);',
+    '  float sheen = pow(max(dot(R, V), 0.0),  8.0) * 0.15;',
+    '  return spec + sheen;',
+    '}',
+    '',
+    'void main() {',
+    '  vec2 uv = (gl_FragCoord.xy - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '  float t = u_time * u_waveSpeed;',
+    '',
+    '  // ── Hexagonal grid ──',
+    '  float sequinScale = 38.0;',
+    '  vec4 hex      = hexTile(uv, sequinScale);',
+    '  vec2 localPos = hex.xy;',
+    '  vec2 cellId   = hex.zw;',
+    '',
+    '  // ── Per-sequin variation ──',
+    '  vec2  rnd      = hash22(cellId);',
+    '  float sizeVar  = 0.85 + rnd.x * 0.3;',
+    '  float baseTilt = (rnd.y - 0.5) * 0.15;',
+    '  float reflVar  = 0.7 + rnd.x * 0.3;',
+    '  float phaseOff = rnd.y * TAU;',
+    '',
+    '  // ── Disc shape ──',
+    '  float discRadius = 0.42 * sizeVar;',
+    '  float dist = length(localPos);',
+    '  float disc = smoothstep(discRadius, discRadius - 0.06, dist);',
+    '  float bevel = smoothstep(discRadius,        discRadius - 0.04, dist)',
+    '              - smoothstep(discRadius - 0.04, discRadius - 0.08, dist);',
+    '',
+    '  // ── Wave-driven tilt ──',
+    '  vec2  worldPos  = cellId / sequinScale;',
+    '  float wave      = waveField(worldPos, t);',
+    '  float shimmer   = sin(t * 3.0 + phaseOff) * 0.04;',
+    '  float tiltAngle = wave * 0.85 + baseTilt + shimmer;',
+    '  float waveH     = waveField(worldPos + vec2(0.01, 0.0), t);',
+    '  float waveV     = waveField(worldPos + vec2(0.0, 0.01), t);',
+    '  float tiltDir   = atan(waveV - wave, waveH - wave);',
+    '',
+    '  // ── Mouse specular ──',
+    '  float mouseSpec = 0.0;',
+    '  if (u_mouse.x > 0.0) {',
+    '    vec2  mUV       = (u_mouse - u_res * 0.5) / min(u_res.x, u_res.y);',
+    '    float mDist     = length(worldPos - mUV);',
+    '    float mInfluence = exp(-mDist * mDist * 6.0);',
+    '    vec3  mLD = normalize(vec3(mUV.x - worldPos.x, mUV.y - worldPos.y, 0.5));',
+    '    float ct2 = cos(tiltAngle); float st2 = sin(tiltAngle);',
+    '    float cd2 = cos(tiltDir);   float sd2 = sin(tiltDir);',
+    '    vec3 mN = vec3(st2 * cd2, st2 * sd2, ct2);',
+    '    vec3 mR = reflect(-mLD, mN);',
+    '    mouseSpec = pow(max(dot(mR, vec3(0.0, 0.0, 1.0)), 0.0), 32.0) * mInfluence * 1.5;',
+    '  }',
+    '',
+    '  // ── Base specular ──',
+    '  float spec = sequinSpecular(tiltAngle, tiltDir);',
+    '',
+    '  // ── C-comment style  /*  and  */  dot-matrix highlight ──────────────',
+    '  vec2  px     = vec2(gl_FragCoord.x, gl_FragCoord.y);',
+    '  float bL     = u_res.x * 0.21;',
+    '  float bR     = u_res.x * 0.79;',
+    '  float bTp    = u_res.y * 0.59;',
+    '  float bBt    = u_res.y * 0.37;',
+    '  float charH  = bTp - bBt;',
+    '  float charCY = (bTp + bBt) * 0.5;',
+    '  float slashW = charH * 0.25;   // horizontal width of the / stroke',
+    '  float starR  = charH * 0.18;   // asterisk arm radius',
+    '  float cGap   = charH * 0.08;   // gap between / and *',
+    '  // Dot size: match sequin grid (sequinScale=38, UV norm by min(res))',
+    '  float cellPx = min(u_res.x, u_res.y) / 38.0;',
+    '  float sp     = cellPx;',
+    '  float dr     = cellPx * 0.65;  // larger than disc → thicker lines',
+    '  // ── Left  /*  ──',
+    '  // / stroke: diagonal bottom-left → top-right',
+    '  float lSlash = dotSegment(px, vec2(bL,bBt), vec2(bL+slashW,bTp), sp, dr);',
+    '  // * centre to the right of /',
+    '  float lAX = bL + slashW + cGap + starR;',
+    '  float lA1 = dotSegment(px,vec2(lAX-starR,charCY),vec2(lAX+starR,charCY),sp,dr);',
+    '  float lA2 = dotSegment(px,vec2(lAX-starR*0.5,charCY-starR*0.866),vec2(lAX+starR*0.5,charCY+starR*0.866),sp,dr);',
+    '  float lA3 = dotSegment(px,vec2(lAX-starR*0.5,charCY+starR*0.866),vec2(lAX+starR*0.5,charCY-starR*0.866),sp,dr);',
+    '  float leftSym = max(lSlash, max(lA1, max(lA2, lA3)));',
+    '  // ── Right  */  ──',
+    '  // * centre to the left of /',
+    '  float rAX = bR - slashW - cGap - starR;',
+    '  float rA1 = dotSegment(px,vec2(rAX-starR,charCY),vec2(rAX+starR,charCY),sp,dr);',
+    '  float rA2 = dotSegment(px,vec2(rAX-starR*0.5,charCY-starR*0.866),vec2(rAX+starR*0.5,charCY+starR*0.866),sp,dr);',
+    '  float rA3 = dotSegment(px,vec2(rAX-starR*0.5,charCY+starR*0.866),vec2(rAX+starR*0.5,charCY-starR*0.866),sp,dr);',
+    '  // / stroke',
+    '  float rSlash = dotSegment(px, vec2(bR-slashW,bBt), vec2(bR,bTp), sp, dr);',
+    '  float rightSym = max(rSlash, max(rA1, max(rA2, rA3)));',
+    '  float bracketShape = max(leftSym, rightSym);',
+    '  float breathe    = 0.5 + 0.5 * sin(u_time * 1.0);',
+    '  float sweepBoost = bracketShape * 3.2 * breathe;',
+    '  // ───────────────────────────────────────────────────────────────────',
+    '',
+    '  spec  = (spec + sweepBoost) * reflVar * u_sparkle;',
+    '  spec += mouseSpec * reflVar;',
+    '',
+    '  // ── Color composition ──',
+    '  vec3 darkSequin = vec3(0.02, 0.015, 0.01);',
+    '  vec3 copperMid  = vec3(0.78, 0.58, 0.42);',
+    '  vec3 amberFlash = vec3(1.0, 0.82, 0.55);',
+    '  vec3 hotGold    = vec3(1.0, 0.92, 0.72);',
+    '',
+    '  float facing = clamp(cos(tiltAngle) * 0.5 + 0.5, 0.0, 1.0);',
+    '  vec3 ambient = mix(darkSequin, vec3(0.05, 0.035, 0.02), facing * 0.6);',
+    '  vec3 sequinColor = ambient;',
+    '  sequinColor += copperMid * pow(max(facing, 0.0), 3.0) * 0.2 * reflVar;',
+    '  sequinColor += copperMid  * smoothstep(0.0, 0.3, spec) * 0.5;',
+    '  sequinColor += amberFlash * smoothstep(0.3, 0.8, spec) * 0.8;',
+    '  sequinColor += hotGold    * smoothstep(0.7, 1.0, spec) * 1.2;',
+    '  sequinColor += copperMid  * bevel * facing * 0.3;',
+    '',
+    '  vec3 bgColor = vec3(0.012, 0.008, 0.005);',
+    '  vec3 col = mix(bgColor, sequinColor, disc);',
+    '',
+    '  float globalLight = 0.85 + 0.15 * dot(normalize(uv + vec2(0.0001)), vec2(0.4, 0.6));',
+    '  col *= globalLight;',
+    '  float vig = 1.0 - smoothstep(0.4, 1.3, length(uv));',
+    '  col *= 0.6 + 0.4 * vig;',
+    '  col = pow(max(col, vec3(0.0)), vec3(0.93, 0.97, 1.04));',
+    '',
+    '  gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);',
+    '}'
+  ].join('\\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      console.error('Shader compile error:', gl.getShaderInfoLog(s));
+    }
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER,   vertSrc));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    console.error('Program link error:', gl.getProgramInfoLog(prog));
+  }
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime      = gl.getUniformLocation(prog, 'u_time');
+  var uRes       = gl.getUniformLocation(prog, 'u_res');
+  var uWaveSpeed = gl.getUniformLocation(prog, 'u_waveSpeed');
+  var uSparkle   = gl.getUniformLocation(prog, 'u_sparkle');
+  var uMouse     = gl.getUniformLocation(prog, 'u_mouse');
+
+  var mouseXVal = -1.0, mouseYVal = -1.0;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.addEventListener('mousemove', function (e) {
+    mouseXVal = e.clientX * dpr;
+    mouseYVal = (canvas.clientHeight - e.clientY) * dpr;
+  });
+  canvas.addEventListener('mouseleave', function () { mouseXVal = -1.0; mouseYVal = -1.0; });
+  canvas.addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    mouseXVal = touch.clientX * dpr;
+    mouseYVal = (canvas.clientHeight - touch.clientY) * dpr;
+  }, { passive: false });
+  canvas.addEventListener('touchmove', function (e) {
+    e.preventDefault();
+    var touch = e.touches[0];
+    mouseXVal = touch.clientX * dpr;
+    mouseYVal = (canvas.clientHeight - touch.clientY) * dpr;
+  }, { passive: false });
+  canvas.addEventListener('touchend', function () { mouseXVal = -1.0; mouseYVal = -1.0; });
+
+  var needsResize = true;
+  function resize() {
+    needsResize = false;
+    var w = Math.round(canvas.clientWidth  * dpr);
+    var h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w; canvas.height = h;
+      gl.viewport(0, 0, w, h);
+      gl.uniform2f(uRes, w, h);
+    }
+  }
+
+  var paused = false;
+
+  function render(now) {
+    if (paused) { requestAnimationFrame(render); return; }
+    if (needsResize) resize();
+    gl.uniform1f(uTime,      prefersReduced ? 0.0 : now * 0.001);
+    gl.uniform1f(uWaveSpeed, WAVE_SPEED);
+    gl.uniform1f(uSparkle,   SPARKLE_INTENSITY);
+    gl.uniform2f(uMouse,     mouseXVal, mouseYVal);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', function () { needsResize = true; });
+  resize();
+  requestAnimationFrame(render);
+
+  document.addEventListener('visibilitychange', function () {
+    paused = document.hidden;
+  });
+
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'param') {
+      switch (e.data.name) {
+        case 'WAVE_SPEED':        WAVE_SPEED        = e.data.value; break;
+        case 'SPARKLE_INTENSITY': SPARKLE_INTENSITY = e.data.value; break;
+      }
+    }
+  });
+})();
+<\/script>
+</body>
+</html>`;
+</script>
+
+</body>
 </html>
