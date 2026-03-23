@@ -26,6 +26,14 @@
 <meta name="theme-color" content="#0a0a0a">
 
 <style>
+  @font-face {
+    font-family: 'Tektur';
+    src: url('/fonts/Tektur/Tektur-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -105,6 +113,7 @@
   }
 
   .brand {
+    font-family: 'Tektur', system-ui, sans-serif;
     font-size: clamp(3rem, 10vw, 5.8rem);
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -115,6 +124,7 @@
 
   /* Slogan */
   .slogan {
+    font-family: 'Tektur', system-ui, sans-serif;
     font-size: clamp(0.85rem, 2vw, 1.05rem);
     font-weight: 400;
     letter-spacing: 0.45em;
@@ -132,6 +142,9 @@
     .brand {
       font-size: clamp(2.4rem, 12vw, 3.2rem);
       margin-bottom: 1rem;
+      /* Condensed width: text shrinks from ~75% to ~59% of screen,
+         giving the shader bracket symbols room to flank on both sides */
+      font-variation-settings: 'wdth' 75;
     }
 
     /* Critical: 0.45em letter-spacing overflows on narrow screens */
@@ -139,8 +152,8 @@
       font-size: 0.75rem;
       letter-spacing: 0.14em;
       line-height: 1.9;
-      /* break at the double-space between the two phrases */
       word-spacing: 0.5em;
+      font-variation-settings: 'wdth' 75;
     }
   }
 
