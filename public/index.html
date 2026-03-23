@@ -21,7 +21,7 @@
 <meta property="twitter:description" content="Native Optics Neural Grain — Opening Soon">
 
 <link rel="icon" href="/favicon.ico">
-<link rel="apple-touch-icon" href="/logo192.png">
+<link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0a0a0a">
 
@@ -33,12 +33,14 @@
     color: #e8e0d8;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   .viewport {
     position: relative;
     width: 100%;
     height: 100vh;
+    height: 100dvh; /* fix iOS address-bar overlap */
     overflow: hidden;
   }
 
@@ -67,6 +69,8 @@
     z-index: 2;
     text-align: center;
     user-select: none;
+    padding: 0 1.5rem;
+    max-width: 100%;
   }
 
   /* "Opening Soon" badge */
@@ -118,6 +122,36 @@
     color: rgba(255, 255, 255, 0.82);
   }
   .gi { color: #e8c87c; }
+
+  /* ── Mobile ── */
+  @media (max-width: 540px) {
+    .badge {
+      margin-bottom: 1.8rem;
+    }
+
+    .brand {
+      font-size: clamp(2.4rem, 12vw, 3.2rem);
+      margin-bottom: 1rem;
+    }
+
+    /* Critical: 0.45em letter-spacing overflows on narrow screens */
+    .slogan {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      line-height: 1.9;
+      /* break at the double-space between the two phrases */
+      word-spacing: 0.5em;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .brand {
+      font-size: 2.2rem;
+    }
+    .slogan {
+      letter-spacing: 0.08em;
+    }
+  }
 </style>
 </head>
 <body>
