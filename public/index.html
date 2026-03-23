@@ -25,14 +25,14 @@
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0a0a0a">
 
+<!-- jsDelivr CDN preconnect -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+<!-- Tektur variable font via jsDelivr (WOFF2, ~50KB vs 159KB TTF) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/tektur@5/index.css">
+
 <style>
-  @font-face {
-    font-family: 'Tektur';
-    src: url('/fonts/Tektur/Tektur-VariableFont_wdth,wght.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -113,7 +113,7 @@
   }
 
   .brand {
-    font-family: 'Tektur', system-ui, sans-serif;
+    font-family: 'Tektur Variable', 'Tektur', system-ui, sans-serif;
     font-size: clamp(3rem, 10vw, 5.8rem);
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -124,7 +124,7 @@
 
   /* Slogan */
   .slogan {
-    font-family: 'Tektur', system-ui, sans-serif;
+    font-family: 'Tektur Variable', 'Tektur', system-ui, sans-serif;
     font-size: clamp(0.85rem, 2vw, 1.05rem);
     font-weight: 400;
     letter-spacing: 0.45em;
