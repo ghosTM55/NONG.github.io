@@ -1,1 +1,8 @@
 .DS_Store
+doc/
+node_modules/
+dist/
+.astro/
+.gstack/
+test-results/
+playwright-report/

@@ -1,0 +1,34 @@
+.navigation-mark {
+  --depart: 130%;
+  --arrive: -130%;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: var(--navigation-mark-width, 112px);
+  aspect-ratio: 7 / 4;
+  color: var(--gold);
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.navigation-mark--left { --depart: -130%; --arrive: 130%; }
+.navigation-mark--left, .navigation-mark--right { overflow: hidden; }
+.navigation-mark svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: var(--navigation-mark-stroke, 1.5); }
+.navigation-mark svg + svg { transform: translateX(var(--arrive)); }
+.navigation-mark__leaf { position: absolute; top: 9.375%; left: 39.2857%; width: 21.4286%; height: 81.25%; border: 1px solid currentColor; background: var(--ink); transform: translateX(calc(var(--leaf) * 54.1667%)); transform-origin: 50% 110%; }
+.navigation-mark__leaf--active { background: var(--gold); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .navigation-mark svg { transition: transform 550ms var(--ease-out); }
+  .navigation-mark__leaf { transition: transform 450ms var(--ease-out); }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-navigation-action]:hover .navigation-mark svg:first-child { transform: translateX(var(--depart)); }
+  [data-navigation-action]:hover .navigation-mark svg + svg { transform: translateX(0); }
+  [data-navigation-action]:hover .navigation-mark__leaf { transform: translateX(calc(var(--leaf) * 79.1667%)) rotate(calc(var(--leaf) * 12deg)); }
+}
+
+[data-navigation-action]:focus-visible .navigation-mark svg:first-child { transform: none; transition: none; }
+[data-navigation-action]:focus-visible .navigation-mark svg + svg { transform: translateX(var(--arrive)); transition: none; }
+[data-navigation-action]:focus-visible .navigation-mark__leaf { transform: translateX(calc(var(--leaf) * 54.1667%)); transition: none; }

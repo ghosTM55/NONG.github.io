@@ -1,0 +1,99 @@
+---
+import { introContent as content } from "../content/intro";
+import IntroDivider from "./IntroDivider.astro";
+import ChapterNavigation from "./ChapterNavigation.astro";
+import PageTitle from "./PageTitle.astro";
+import "../styles/intro.css";
+
+const partnerIcons = {
+  museum: "m3 8 9-5 9 5ZM5 10v9m7-9v9m7-9v9M3 21h18M3 10h18",
+  creator: "m5 15-2 6 6-2L20 8l-4-4ZM13 7l4 4M5 15l4 4M17 3l1-1 4 4-1 1",
+  entertainment: "M3 4h18v16H3ZM3 8h18M3 16h18M7 4v4m5-4v4m5-4v4M7 16v4m5-4v4m5-4v4m-7-11 5 3-5 3Z",
+  city: "M3 21V10h7v11M10 21V3h7v18m0-9h4v9M1 21h22M6 13v2m0 2v2m7-13v2m0 2v2m0 2v2m0 2v2",
+};
+---
+
+<main class="studio-page studio-page--section intro-page" data-intro-page>
+  <header class="intro-heading">
+    <PageTitle number="01" label="The studio" title="INTRO" />
+    <div class="intro-heading__copy">
+      <p class="intro-heading__lead">{content.overview}</p>
+      <p class="intro-heading__context">{content.approach}</p>
+    </div>
+  </header>
+
+  <nav class="intro-navigation" aria-label="Intro practices">
+    {content.practices.map((practice) => (
+      <a href={`#${practice.id}`} data-intro-link={practice.id}>
+        <span>{practice.label}</span>
+        <span class="intro-navigation__arrow" aria-hidden="true">↓</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="intro-practices">
+    {content.practices.map((practice, index) => (
+      <Fragment>
+      {index > 0 && <IntroDivider motif={index === 1 ? "bar" : "diamond"} />}
+      <section
+        class:list={["intro-practice", { "intro-practice--reverse": index === 1 }]}
+        id={practice.id}
+        aria-labelledby={`${practice.id}-title`}
+        data-intro-practice
+      >
+        <div class="intro-practice__copy">
+          <h2 id={`${practice.id}-title`}>IP <span>{practice.label}</span></h2>
+          <p class="intro-practice__description">{practice.description}</p>
+          <ul class="intro-practice__capabilities" aria-label={`${practice.label} capabilities`}>
+            {practice.capabilities.map(capability => <li>{capability}</li>)}
+          </ul>
+        </div>
+        <figure class="intro-media" data-intro-media>
+          <div class="intro-media__frame">
+            <div class="intro-media__visual">
+              <img src={practice.image} alt={practice.alt} width="720" height="576" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
+              <video
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster={practice.image}
+                width="720"
+                height="576"
+                aria-hidden="true"
+                tabindex="-1"
+                data-intro-video
+                data-src={practice.video}
+              ></video>
+            </div>
+            <div class="intro-media__cover" aria-hidden="true"></div>
+          </div>
+        </figure>
+      </section>
+      </Fragment>
+    ))}
+  </div>
+
+  <IntroDivider motif="ring" />
+  <aside class="intro-partners" aria-labelledby="intro-partners-title">
+    <h2 id="intro-partners-title">Who we work with</h2>
+    <ul>{content.partners.map(partner => (
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d={partnerIcons[partner.icon]} /></svg>
+        <span>{partner.label}</span>
+      </li>
+    ))}</ul>
+  </aside>
+
+  <section class="intro-collaboration" aria-labelledby="intro-collaboration-title">
+    <h2 id="intro-collaboration-title">Start with a story,<br />a collection or a place.</h2>
+    <div>
+      <p>{content.collaboration}</p>
+      <a class="page-link intro-contact" href="/contact/">Discuss a project<span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <ChapterNavigation next={{ title: "Curation", href: "/curation/", number: "02" }} />
+</main>
+
+<script src="../motion/intro.ts"></script>

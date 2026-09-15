@@ -1,0 +1,133 @@
+---
+import { spaceArtifacts } from "../content/curationSpace";
+import "../styles/curation-space.css";
+import DemoNav from "./DemoNav.astro";
+
+const objectTotal = String(spaceArtifacts.length).padStart(2, "0");
+---
+
+<main class="space-experience" data-space-root data-artifacts={JSON.stringify(spaceArtifacts)} data-state="loading">
+  <canvas class="space-canvas" data-space-canvas tabindex="0" aria-label="安徽馆可探索三维空间"></canvas>
+  <div class="space-atmosphere" aria-hidden="true"></div>
+
+  <div class="space-loader" data-space-loader role="status">
+    <span data-load-progress>00</span>
+    <div><i data-load-bar></i></div>
+    <p>构筑空间与展陈</p>
+  </div>
+
+  <DemoNav active="space" />
+
+  <section class="space-intro" data-space-intro aria-labelledby="space-title">
+    <div class="space-intro__image" aria-hidden="true"></div>
+    <div class="space-intro__shade" aria-hidden="true"></div>
+    <div class="space-intro__body">
+      <p class="space-kicker"><span>01</span> SPATIAL CURATION PROTOTYPE</p>
+      <h1 id="space-title">ANHUI<br />PAVILION</h1>
+      <p class="space-intro__zh">方厅水院 · 安徽馆</p>
+      <p class="space-intro__copy">为快速演示收敛成闭合矩形展厅：中央水池、四周步道与靠墙影像展陈。进入空间后可自由行走，并查看每件作品的数字档案。</p>
+      <button type="button" class="space-enter" data-enter-space>
+        <span><b>ENTER THE PAVILION</b><small>进入可探索场馆</small></span>
+        <svg viewBox="0 0 48 18" aria-hidden="true"><path d="M0 9h45M37 1l8 8-8 8" /></svg>
+      </button>
+    </div>
+    <div class="space-intro__facts">
+      <p><span>SPACE TYPE</span><b>RECTANGULAR WATER COURT</b></p>
+      <p><span>NAVIGATION</span><b>DRAG · WASD · SCROLL</b></p>
+    </div>
+  </section>
+
+  <div class="space-hud" data-space-hud aria-hidden="true">
+    <div class="space-position">
+      <span>LEVEL 01</span>
+      <strong data-space-location>南侧入口廊</strong>
+    </div>
+
+    <div class="space-viewpoints" aria-label="空间视点">
+      <p>VIEW</p>
+      <button type="button" data-viewpoint="courtyard" class="is-active">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM8 5v14m8-14v14M3 10h18" /></svg>
+        <span><b>COURTYARD</b><small>水院入口</small></span>
+      </button>
+      <button type="button" data-viewpoint="collection">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM7 7h10v10H7zM12 7v10" /></svg>
+        <span><b>COLLECTION</b><small>四面展墙</small></span>
+      </button>
+      <button type="button" data-viewpoint="room">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V4h14v16M9 17V7h6v10M3 20h18" /></svg>
+        <span><b>ROOM</b><small>展厅全景</small></span>
+      </button>
+    </div>
+
+    <aside class="space-collection" aria-label="本空间藏品">
+      <button class="space-collection__toggle" type="button" data-index-toggle aria-expanded="false">
+        <span><small>IN THIS SPACE</small><b>{objectTotal} OBJECTS</b></span>
+        <i aria-hidden="true">＋</i>
+      </button>
+      <div class="space-collection__list" data-index-list hidden inert>
+        {spaceArtifacts.map((artifact, index) => (
+          <button type="button" data-index-object={index}>
+            <span>{artifact.index}</span>
+            <img src={artifact.image} alt="" loading="lazy" />
+            <span><strong>{artifact.titleZh}</strong><small>{artifact.category}</small></span>
+          </button>
+        ))}
+      </div>
+    </aside>
+
+    <div class="space-markers" data-space-markers>
+      {spaceArtifacts.map((artifact, index) => (
+        <button type="button" class="space-marker" data-space-marker={index} aria-label={`查看${artifact.titleZh}`}>
+          <span>{artifact.index}</span><i></i>
+        </button>
+      ))}
+    </div>
+
+    <div class="space-controls" aria-label="操作说明">
+      <span class="space-controls__drag"><i aria-hidden="true"></i><b>拖动转向</b></span>
+      <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><b>移动</b></span>
+      <span><svg viewBox="0 0 18 22" aria-hidden="true"><rect x="3" y="1" width="12" height="20" rx="6"/><path d="M9 5v5m-2-3 2-2 2 2"/></svg><b>滚轮前进</b></span>
+    </div>
+
+    <div class="space-mobile-controls" aria-label="触屏移动">
+      <button type="button" data-move="forward" aria-label="前进">↑</button>
+      <button type="button" data-move="left" aria-label="左移">←</button>
+      <button type="button" data-move="back" aria-label="后退">↓</button>
+      <button type="button" data-move="right" aria-label="右移">→</button>
+    </div>
+
+    <p class="space-reconstruction-note">REAL-TIME 3D GALLERY · DISPLAY POSITIONS PROVISIONAL</p>
+  </div>
+
+  <button class="space-detail-scrim" type="button" data-detail-scrim aria-label="关闭藏品说明" hidden inert></button>
+  <aside class="space-detail" data-space-detail aria-hidden="true" inert>
+    <header>
+      <p><span data-detail-index>01</span> / {objectTotal}</p>
+      <button type="button" data-detail-close aria-label="关闭藏品说明"><span>CLOSE</span> ×</button>
+    </header>
+    <div class="space-detail__visual">
+      <img data-detail-image src={spaceArtifacts[0].image} alt={spaceArtifacts[0].imageAlt} />
+      <p><span data-detail-category>{spaceArtifacts[0].category}</span><b data-detail-status>{spaceArtifacts[0].recordStatus}</b></p>
+    </div>
+    <div class="space-detail__body">
+      <h2 data-detail-title-zh>{spaceArtifacts[0].titleZh}</h2>
+      <p class="space-detail__latin" data-detail-title>{spaceArtifacts[0].title}</p>
+      <dl>
+        <div><dt>DATE</dt><dd data-detail-date>{spaceArtifacts[0].date}</dd></div>
+        <div><dt>MATERIAL</dt><dd data-detail-material>{spaceArtifacts[0].material}</dd></div>
+        <div><dt>LOCATION</dt><dd data-detail-location>{spaceArtifacts[0].location}</dd></div>
+      </dl>
+      <section><h3>藏品故事</h3><p data-detail-story>{spaceArtifacts[0].story}</p></section>
+      <section><h3>数字化陈列</h3><p data-detail-interpretation>{spaceArtifacts[0].interpretation}</p></section>
+      <a data-detail-source href={spaceArtifacts[0].sourceUrl} target="_blank" rel="noreferrer">
+        <span>SOURCE</span><b data-detail-source-label>{spaceArtifacts[0].sourceLabel}</b><i aria-hidden="true">↗</i>
+      </a>
+    </div>
+    <footer>
+      <button type="button" data-detail-direction="previous" aria-label="上一件">← <span>PREVIOUS</span></button>
+      <button type="button" data-detail-direction="next" aria-label="下一件"><span>NEXT</span> →</button>
+    </footer>
+  </aside>
+</main>
+
+<script src="../motion/curationSpace.js"></script>

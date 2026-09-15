@@ -1,0 +1,23 @@
+{
+  "name": "nong-studio-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --test scripts/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "astro": "^7.3.2",
+    "gsap": "^3.15.0",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@playwright/test": "^1.63.0",
+    "typescript": "^6.0.3"
+  }
+}

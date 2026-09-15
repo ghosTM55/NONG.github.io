@@ -1,0 +1,100 @@
+---
+import { contactEmail, contactPractices } from "../content/contact";
+import PageTitle from "./PageTitle.astro";
+import ChapterNavigation from "./ChapterNavigation.astro";
+import NavigationMark from "./NavigationMark.astro";
+import "../styles/contact-page.css";
+---
+
+<main class="studio-page studio-page--section contact-page">
+  <header class="contact-heading">
+    <PageTitle number="05" label="New conversations" title="CONTACT" />
+    <p>A story, a collection, a place.<br />Every collaboration starts somewhere.</p>
+  </header>
+
+  <div class="contact-body">
+    <section class="contact-invitation" aria-labelledby="contact-invitation-title">
+      <h2 id="contact-invitation-title">Start a<br />conversation.</h2>
+      <p class="contact-invitation__intro">Tell us what you have in mind.<br />An early idea is a good place to start.</p>
+      <a class="contact-address" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      <button
+        class="contact-copy"
+        type="button"
+        aria-label="Copy contact email address"
+        data-copy-email
+        data-email={contactEmail}
+        data-copy-message="Email address copied"
+        data-copy-error="Please select and copy the address above"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v12H8zM4 16V4h12" /></svg>
+        <span>Copy email</span>
+        <span class="contact-copy__feedback" role="status" aria-live="polite" data-copy-email-status></span>
+      </button>
+      <p class="contact-invitation__note">Not sure where to start?<br />You can always write to us directly.</p>
+    </section>
+
+    <section class="contact-enquiries" aria-labelledby="contact-enquiries-title">
+      <h2 class="contact-enquiries__label" id="contact-enquiries-title">What would you like to explore?</h2>
+      <div class="contact-practices">
+        {contactPractices.map((practice, index) => (
+          <details class="contact-practice" name="contact-practice" id={practice.id}>
+            <summary class="contact-practice__summary">
+              <span class="contact-practice__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <span class="contact-practice__heading">
+                <span class="contact-practice__label">{practice.label}</span>
+                <span class="contact-practice__title">{practice.title}</span>
+                <span class="contact-practice__description">{practice.description}</span>
+              </span>
+              <span class="contact-practice__toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="contact-practice__body">
+              <p class="contact-practice__prompt">A few things you could share</p>
+              <ul>{practice.prompts.map(prompt => <li>{prompt}</li>)}</ul>
+              <div class="contact-practice__action">
+                <a
+                  class="contact-write"
+                  href={practice.mailto}
+                  aria-label={`Write to us about ${practice.label}`}
+                  aria-describedby={`${practice.id}-email-hint`}
+                  data-navigation-action
+                >
+                  <span class="contact-write__label">Write to us</span>
+                  <span class="contact-write__arrow"><NavigationMark kind="right" /></span>
+                </a>
+                <span class="contact-practice__hint" id={`${practice.id}-email-hint`} role="tooltip">
+                  <span>Opens your email app with a starting note. Share only what you know so far.</span>
+                </span>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <ChapterNavigation next={{ title: "Intro", href: "/intro/", context: "Explore our practices", number: "01" }} />
+</main>
+
+<script>
+  const revealEnquiry = () => {
+    const enquiry = document.getElementById(window.location.hash.slice(1));
+    if (!(enquiry instanceof HTMLDetailsElement) || !enquiry.classList.contains("contact-practice")) return;
+    enquiry.open = true;
+    enquiry.scrollIntoView({ block: "start" });
+  };
+  revealEnquiry();
+  window.addEventListener("hashchange", revealEnquiry);
+
+  const actions = document.querySelectorAll<HTMLElement>(".contact-practice__action");
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    actions.forEach(action => {
+      if (action.matches(":hover, :focus-within")) action.setAttribute("data-hint-dismissed", "");
+    });
+  });
+  actions.forEach(action => {
+    const resetHint = () => action.removeAttribute("data-hint-dismissed");
+    action.addEventListener("pointerleave", resetHint);
+    action.addEventListener("focusout", resetHint);
+  });
+</script>

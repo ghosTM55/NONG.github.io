@@ -1,0 +1,69 @@
+---
+import { localizedPath, type Locale } from "../content/home";
+
+interface Props {
+  idPrefix: string;
+  currentLocale: Locale;
+  class?: string;
+}
+
+const { idPrefix, currentLocale, class: className } = Astro.props;
+const selectedLanguage = currentLocale === "zh" ? "Chinese" : "English";
+const pagePath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
+const languages = [
+  { locale: "en", label: "English", code: "EN", lang: "en" },
+  { locale: "zh", label: "中文", code: "CN", lang: "zh-CN" },
+] as const;
+---
+
+<div class:list={["language", className]} data-language-root>
+  <button
+    class="language__trigger"
+    id={`${idPrefix}-trigger`}
+    type="button"
+    aria-label={`Choose language, ${selectedLanguage} selected`}
+    aria-haspopup="menu"
+    aria-controls={`${idPrefix}-menu`}
+    aria-expanded="false"
+    data-language-trigger
+  >
+    <svg width="19" height="19" viewBox="0 0 19 19" aria-hidden="true">
+      <circle cx="9.5" cy="9.5" r="8.25" fill="none" stroke="currentColor" stroke-width="1"></circle>
+      <ellipse cx="9.5" cy="9.5" rx="3.6" ry="8.25" fill="none" stroke="currentColor" stroke-width="1"></ellipse>
+      <path d="M1.25 9.5h16.5" fill="none" stroke="currentColor" stroke-width="1"></path>
+    </svg>
+    <svg class="language__chevron" width="13" height="13" viewBox="0 0 13 13" aria-hidden="true">
+      <path d="m3 5 3.5 3L10 5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"></path>
+    </svg>
+  </button>
+
+  <ul
+    class="language__menu"
+    id={`${idPrefix}-menu`}
+    role="menu"
+    aria-label="Language"
+    aria-hidden="true"
+    data-open="false"
+    data-language-menu
+  >
+    {
+      languages.map((language) => (
+        <li role="none">
+          <a
+            class="language__option"
+            href={localizedPath(pagePath, language.locale)}
+            role="menuitemradio"
+            aria-checked={currentLocale === language.locale}
+            tabindex="-1"
+            data-language-option
+            data-language={language.locale}
+          >
+            <span class="language__indicator" aria-hidden="true"></span>
+            <span class="language__label" lang={language.lang}>{language.label}</span>
+            <span class="language__code">{language.code}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

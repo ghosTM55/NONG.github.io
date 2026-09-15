@@ -1,0 +1,222 @@
+---
+import { curationObjects } from "../content/curation";
+import "../styles/curation-demo.css";
+import DemoNav from "./DemoNav.astro";
+
+const initial = curationObjects[0];
+---
+
+<main class="curation-demo" data-curation-demo data-objects={JSON.stringify(curationObjects)}>
+  <DemoNav active="objects" />
+
+  <section class="artifact-workspace" aria-labelledby="object-title">
+    <div class="artifact-meta" aria-live="polite">
+      <div class="artifact-meta__count"><span data-object-number>01</span> / {String(curationObjects.length).padStart(2, "0")}</div>
+      <p class="artifact-meta__eyebrow">DIGITAL SURROGATE</p>
+      <h1 id="object-title" data-object-title>{initial.title}</h1>
+      <p class="artifact-meta__subtitle" data-object-subtitle>{initial.subtitle}</p>
+
+      <section class="artifact-meta__story" aria-labelledby="story-title">
+        <p id="story-title">OBJECT STORY</p>
+        <div data-object-story>{initial.story}</div>
+      </section>
+
+      <dl class="artifact-meta__facts">
+        <div><dt>DATE</dt><dd data-object-date>{initial.date}</dd></div>
+        <div><dt>ORIGIN</dt><dd data-object-origin>{initial.origin}</dd></div>
+        <div><dt>MATERIAL</dt><dd data-object-material>{initial.material}</dd></div>
+        <div><dt>DIMENSIONS</dt><dd data-object-dimensions>{initial.dimensions}</dd></div>
+      </dl>
+
+      <a class="artifact-meta__source" data-object-source href={initial.source} target="_blank" rel="noreferrer">
+        <span data-object-collection>{initial.collection}</span>
+        <span class="artifact-meta__source-mark" aria-hidden="true">↗</span>
+        <small><span data-object-accession>{initial.accession}</span> · <span data-object-license>{initial.license}</span></small>
+      </a>
+    </div>
+
+    <div class="artifact-viewport" data-artifact-viewport tabindex="0" aria-label="Interactive digital object. Drag to rotate, scroll to zoom, or use the arrow keys.">
+      <div class="artifact-viewport__grid" aria-hidden="true"></div>
+      <p class="artifact-viewport__status"><span></span> LIVE MODEL</p>
+
+      <div class="artifact-object" data-artifact-object style={`--artifact-ratio: ${initial.ratio}`}>
+        <div class="artifact-object__face artifact-object__face--front">
+          <img data-artifact-image src={initial.image} alt={initial.alt} width="2400" height="1394" decoding="async" fetchpriority="high" />
+          {
+            initial.notes.map((note, index) => (
+              <button
+                class={`artifact-hotspot artifact-hotspot--${index + 1}`}
+                type="button"
+                aria-label={`Inspect ${note.title}`}
+                data-hotspot={index}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+              </button>
+            ))
+          }
+        </div>
+        <div class="artifact-object__face artifact-object__face--back" aria-hidden="true">
+          <span>REVERSE SURFACE<br />DEMO RECONSTRUCTION</span>
+        </div>
+        <i class="artifact-object__edge artifact-object__edge--top" aria-hidden="true"></i>
+        <i class="artifact-object__edge artifact-object__edge--bottom" aria-hidden="true"></i>
+        <i class="artifact-object__edge artifact-object__edge--left" aria-hidden="true"></i>
+        <i class="artifact-object__edge artifact-object__edge--right" aria-hidden="true"></i>
+      </div>
+
+      <div class="artifact-note" data-artifact-note aria-live="polite" aria-hidden="true" inert>
+        <span data-note-number>01</span>
+        <div>
+          <strong data-note-title>{initial.notes[0].title}</strong>
+          <p data-note-copy>{initial.notes[0].description}</p>
+        </div>
+        <button type="button" data-note-close aria-label="Close annotation"><span aria-hidden="true">×</span></button>
+      </div>
+
+      <div class="artifact-viewport__hint" aria-label="Model interaction instructions">
+        <span>
+          <svg viewBox="0 0 28 16" aria-hidden="true"><path d="M2 8h24M6 4 2 8l4 4M22 4l4 4-4 4" /></svg>
+          DRAG TO MOVE
+        </span>
+        <span>
+          <svg viewBox="0 0 22 24" aria-hidden="true"><rect x="5" y="2" width="12" height="20" rx="6" /><path d="M11 6v5M8.5 8.5 11 11l2.5-2.5" /></svg>
+          SCROLL TO ZOOM
+        </span>
+      </div>
+    </div>
+
+    <aside class="artifact-tools" aria-label="Model controls">
+      <div class="artifact-tools__group">
+        <p>DIGITAL LAYERS</p>
+        <button type="button" data-surface="color" aria-pressed="true">
+          <span>01</span><strong>ORIGINAL</strong><small>PHOTOGRAPHED COLOUR</small>
+        </button>
+        <button type="button" data-surface="ink" aria-pressed="false">
+          <span>02</span><strong>SCRIPT</strong><small>HIGH-CONTRAST TEXT</small>
+        </button>
+      </div>
+      <div class="artifact-tools__group artifact-tools__group--view">
+        <p class="artifact-tools__view-title">VIEW ANGLE</p>
+        <button type="button" data-view="front" aria-pressed="true">
+          <svg viewBox="0 0 24 18" aria-hidden="true"><rect x="2" y="2" width="20" height="14" /><circle cx="12" cy="9" r="2" /></svg>
+          <span>FRONT</span>
+        </button>
+        <button type="button" data-view="edge" aria-pressed="false">
+          <svg viewBox="0 0 24 18" aria-hidden="true"><path d="M2 7h20v4H2zM5 5h14M5 13h14" /></svg>
+          <span>EDGE</span>
+        </button>
+        <button type="button" data-view="reverse" aria-pressed="false">
+          <svg viewBox="0 0 24 18" aria-hidden="true"><rect x="2" y="2" width="20" height="14" /><path d="m9 6-3 3 3 3M6 9h9" /></svg>
+          <span>REVERSE</span>
+        </button>
+      </div>
+      <div class="artifact-tools__zoom" aria-label="Zoom controls">
+        <button class="artifact-tools__reset" type="button" data-view="reset" aria-label="Reset view and zoom"><span aria-hidden="true">↺</span> RESET</button>
+        <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+        <output data-zoom-output>100 %</output>
+        <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+      </div>
+    </aside>
+  </section>
+
+  <section class="collection-dock" data-collection-dock aria-label="Quick object selection">
+    <div class="collection-dock__intro">
+      <p>COLLECTION</p>
+      <span><b data-rail-start>01</b>–<b data-rail-end>05</b> / 60</span>
+    </div>
+
+    <button class="collection-dock__nav collection-dock__nav--previous" type="button" data-rail-direction="previous" disabled aria-label="Previous 5 objects">←</button>
+
+    <div class="collection-rail" data-collection-rail>
+      {
+        curationObjects.map((object, index) => (
+          <button
+            class="collection-rail__item"
+            type="button"
+            data-collection-item={index}
+            data-rail-item={index}
+            aria-pressed={index === 0 ? "true" : "false"}
+            hidden={index >= 5}
+          >
+            <span class="collection-rail__number">{String(index + 1).padStart(2, "0")}</span>
+            <span class="collection-rail__thumb">
+              <img
+                src={object.image}
+                alt=""
+                loading={index < 5 ? "eager" : "lazy"}
+                decoding="async"
+                style={`object-position: ${18 + (index * 17) % 65}% ${22 + (index * 13) % 58}%`}
+              />
+            </span>
+            <span class="collection-rail__copy">
+              <strong>{object.title}</strong>
+              <small>{object.date} · {object.origin}</small>
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <button class="collection-dock__nav collection-dock__nav--next" type="button" data-rail-direction="next" aria-label="Next 5 objects">→</button>
+
+    <div class="collection-dock__actions">
+      <button class="collection-dock__expand" type="button" data-catalog-open>
+        <span><strong>EXPAND</strong><small>COLLECTION</small></span><i aria-hidden="true">↗</i>
+      </button>
+    </div>
+  </section>
+
+  <section class="collection-catalog" aria-labelledby="catalog-title" data-collection-catalog hidden inert>
+    <header class="collection-catalog__header">
+      <div class="collection-catalog__heading">
+        <p>CURATION INDEX · 60 DIGITAL RECORDS</p>
+        <h2 id="catalog-title">Palm-leaf manuscript collection</h2>
+      </div>
+      <p class="collection-catalog__range"><span data-range-start>01</span>–<span data-range-end>30</span> / 60</p>
+      <nav class="collection-pagination" aria-label="Collection pages">
+        <button type="button" data-page-direction="previous" disabled aria-label="Previous 30 objects">←</button>
+        <div><span data-current-page>01</span><i>/</i><span>02</span></div>
+        <button type="button" data-page-direction="next" aria-label="Next 30 objects">→</button>
+      </nav>
+      <button class="collection-catalog__close" type="button" data-catalog-close aria-label="Close collection"><b>CLOSE</b><span aria-hidden="true">×</span></button>
+    </header>
+
+    <div class="collection-catalog__grid" data-collection-grid>
+      {
+        curationObjects.map((object, index) => (
+          <button
+            class="collection-item"
+            type="button"
+            data-collection-item={index}
+            data-collection-page={Math.floor(index / 30) + 1}
+            data-record-status={object.recordStatus}
+            aria-pressed={index === 0 ? "true" : "false"}
+            hidden={index >= 30}
+          >
+            <span class="collection-item__thumb">
+              <img
+                src={object.image}
+                alt=""
+                loading={index < 6 ? "eager" : "lazy"}
+                decoding="async"
+                style={`object-position: ${18 + (index * 17) % 65}% ${22 + (index * 13) % 58}%`}
+              />
+              <span class="collection-item__index">{String(index + 1).padStart(2, "0")}</span>
+            </span>
+            <span class="collection-item__copy">
+              <strong>{object.title}</strong>
+              <small>{object.date}<br />{object.origin}</small>
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <footer class="collection-catalog__footer">
+      <p>Select an object to load its model, metadata and story.</p>
+      <button type="button" data-page-direction="next">VIEW OBJECTS 31–60 <span aria-hidden="true">→</span></button>
+    </footer>
+  </section>
+</main>
+
+<script src="../motion/curationDemo.ts"></script>

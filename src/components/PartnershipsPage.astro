@@ -1,0 +1,165 @@
+---
+import PageTitle from "./PageTitle.astro";
+import ChapterNavigation from "./ChapterNavigation.astro";
+import { immersiveProjects, characterCapabilities, partnershipPractices } from "../content/partnerships";
+import "../styles/partnerships-page.css";
+---
+
+<main class="studio-page studio-page--section partnerships-page">
+  <header class="partnerships-heading">
+    <PageTitle number="03" label="Our strategic partners" title="PARTNERSHIPS" />
+    <div class="partnerships-intro">
+      <p class="partnerships-intro__lead">Bring stories into spaces.<br />Bring characters to life.</p>
+      <p class="partnerships-intro__context">NONG Studio and our strategic partners bring together IP development, immersive experience design and AI character interaction to create new ways for audiences to encounter culture.</p>
+    </div>
+    <nav class="partnerships-directory" aria-label="Explore partner capabilities">
+      <a href="#immersive">
+        <span><span class="partnerships-directory__name">Immersive experiences</span><span class="partnerships-directory__scope">Spatial storytelling & digital interpretation</span></span>
+        <span class="partnerships-directory__arrow" aria-hidden="true">↓</span>
+      </a>
+      <a href="#realnpc">
+        <span><span class="partnerships-directory__name">AI characters & interaction</span><span class="partnerships-directory__scope">Character design & dialogue</span></span>
+        <span class="partnerships-directory__arrow" aria-hidden="true">↓</span>
+      </a>
+    </nav>
+  </header>
+
+  <section class="partner-section partner-section--immersive" id="immersive" aria-labelledby="immersive-title">
+    <header class="partner-section__heading">
+      <p class="partnerships-label">01 / Immersive experiences</p>
+      <p class="partner-section__credit">Our strategic partners</p>
+    </header>
+    <div class="partner-section__introduction">
+      <h2 id="immersive-title">Stories you can<br /><span>step inside.</span></h2>
+      <p>NONG Studio’s cultural and IP direction meets spatial storytelling, cinematic media and interactive design. Together with our strategic partners, we shape the journey from the first narrative to the public experience.</p>
+    </div>
+
+    <div class="immersive-work" role="group" aria-labelledby="immersive-work-label">
+      <p class="immersive-work__credit" id="immersive-work-label">Selected work by our strategic partners</p>
+      <div class="immersive-work__gallery">
+        {immersiveProjects.map((project, index) => (
+          <figure class:list={["immersive-case", { "immersive-case--lead": index === 0 }]}>
+            <div class="immersive-case__image">
+              <img
+                src={project.image}
+                srcset={project.srcset}
+                sizes={index === 0 ? "(max-width: 680px) calc(100vw - 48px), (max-width: 1680px) 85vw, 1428px" : "(max-width: 680px) calc(100vw - 48px), (max-width: 1680px) 41vw, 690px"}
+                alt={project.alt}
+                width={project.width}
+                height={project.height}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </div>
+            <figcaption>
+              <div class="immersive-case__title">
+                <span class="immersive-case__number" aria-hidden="true">0{index + 1}</span>
+                <h3>{project.capability}</h3>
+              </div>
+              <div class="immersive-case__detail">
+                <p>{project.scope}</p>
+                <a class="immersive-case__project" href={project.href} aria-label={`View partner project: ${project.title}, ${project.location}`}>
+                  <span>{project.title}<span class="immersive-case__location">{project.location}</span></span>
+                  <span class="immersive-case__arrow" aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="partner-source">Project credits: <a href="https://www.immersive.international/">Immersive International</a></p>
+    </div>
+  </section>
+
+  <section class="partner-section partner-section--characters" id="realnpc" aria-labelledby="realnpc-title">
+    <header class="partner-section__heading">
+      <p class="partnerships-label">02 / AI characters & interaction</p>
+      <p class="partner-section__credit">Our strategic partners</p>
+    </header>
+    <div class="character-feature">
+      <div class="character-feature__copy">
+        <h2 id="realnpc-title">Characters you can<br /><span>connect with.</span></h2>
+        <p class="character-feature__description">An IP character can become someone your audience meets. With our strategic partners, we combine character development and cultural storytelling with AI dialogue and on-screen presence.</p>
+        <dl class="partner-capabilities">
+          {characterCapabilities.map((capability, index) => (
+            <div>
+              <dt><span aria-hidden="true">0{index + 1}</span>{capability.title}</dt>
+              <dd>{capability.description}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <figure class="character-visual">
+        <div class="character-visual__stage">
+          <img
+            src="/assets/partnerships/realnpc-character-800.webp"
+            srcset="/assets/partnerships/realnpc-character-400.webp 400w, /assets/partnerships/realnpc-character-800.webp 800w"
+            sizes="(max-width: 431px) calc(100vw - 96px), 336px"
+            width="800"
+            height="1635"
+            alt="A white-haired digital character in a futuristic white jacket, dark outfit and sneakers."
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="character-visual__side-label" aria-hidden="true">A character. A conversation. A connection.</span>
+        </div>
+        <figcaption><span>Character concept / Our strategic partners</span><span>Image courtesy of RealNPC.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="partnership-practices" aria-labelledby="partnership-practices-title">
+    <header class="partnership-practices__heading">
+      <p class="partnerships-label">Across our three practices</p>
+      <h2 id="partnership-practices-title">The right expertise.<br /><span>One shared direction.</span></h2>
+      <p>NONG Studio shapes the IP direction, audience experience and program. Our strategic partners contribute specialist capabilities around the needs of each project.</p>
+    </header>
+    <div class="partnership-practices__rows">
+      {partnershipPractices.map((practice, index) => (
+        <article class="partnership-practice" aria-labelledby={`practice-${index}`}>
+          <header>
+            <h3 id={`practice-${index}`}>IP {practice.title}</h3>
+            <p>{practice.outcome}</p>
+          </header>
+          <dl>
+            <div><dt>NONG Studio</dt><dd>{practice.nong}</dd></div>
+            <div><dt>Our strategic partners</dt><dd>{practice.partners}</dd></div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="partnership-encounter" id="possibilities" aria-labelledby="partnership-encounter-title">
+    <div class="partnership-encounter__copy">
+      <p class="partnerships-label">Imagine the possibilities</p>
+      <h2 id="partnership-encounter-title">Some worlds can only<br /><span>be imagined together.</span></h2>
+      <p>Imagine stories that travel across cultures, places that become part of a city’s identity, and worlds that stay with people for generations. Join NONG Studio in creating a new chapter of culture, one that none of us could bring to life alone.</p>
+      <a class="page-link" href="/contact/#partnerships">Imagine with us<span aria-hidden="true">↗</span></a>
+    </div>
+    <figure class="partnership-encounter__visual">
+      <img
+        src="/assets/partnerships/unwritten-world-1254.webp"
+        srcset="/assets/partnerships/unwritten-world-640.webp 640w, /assets/partnerships/unwritten-world-1254.webp 1254w"
+        sizes="(max-width: 680px) calc(100vw - 48px), (max-width: 980px) 85vw, (max-width: 1680px) 41vw, 690px"
+        width="1254"
+        height="1254"
+        alt="An unbroken silk scroll unfolds across misty water toward distant mountains, with two small figures looking out at the horizon."
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>An unwritten world, waiting to be explored.</figcaption>
+    </figure>
+  </section>
+
+  <section class="partnership-invitation" aria-labelledby="partnership-invitation-title">
+    <div>
+      <p class="partnerships-label">Join our network</p>
+      <h2 id="partnership-invitation-title">Become a strategic partner.</h2>
+      <p>Bring your creative or technical expertise to new cultural experiences. Let’s explore what we can create together.</p>
+    </div>
+    <a class="page-link" href="/contact/#partnerships">Explore a partnership<span aria-hidden="true">↗</span></a>
+  </section>
+
+  <ChapterNavigation next={{ title: "Contact", href: "/contact/", number: "05" }} />
+</main>

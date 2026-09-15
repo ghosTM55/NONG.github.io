@@ -1,0 +1,13 @@
+---
+interface Props { animated: boolean; flow?: "intro" | "curation"; }
+const { animated, flow } = Astro.props;
+---
+
+<canvas
+  class="site-background"
+  data-site-background={flow ?? (animated ? "animated" : "static")}
+  aria-hidden="true"
+></canvas>
+<div class="site-background-treatment" aria-hidden="true"></div>
+
+<script src="../motion/background.ts"></script>

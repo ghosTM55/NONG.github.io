@@ -1,6 +1,6 @@
 {
   "short_name": "NONG Studio",
-  "name": "NONG Studio — Opening Soon",
+  "name": "NONG Studio",
   "icons": [
     {
       "src": "favicon.svg",
@@ -15,6 +15,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#0a0a0a",
-  "background_color": "#0a0a0a"
+  "theme_color": "#081A14",
+  "background_color": "#081A14"
 }

@@ -1,0 +1,14 @@
+---
+import { localizedPath } from "../content/home";
+import NavigationMark from "./NavigationMark.astro";
+interface Props { active: "objects" | "space"; }
+const { active } = Astro.props;
+const locale = Astro.url.pathname.startsWith("/zh/") ? "zh" : "en";
+---
+<nav class="demo-nav" aria-label="Demo navigation">
+  <a class="demo-nav__back" href={localizedPath("/demo/", locale)} data-navigation-action><NavigationMark kind="left" /><span>DEMOS</span></a>
+  <div class="demo-nav__views">
+    <a href={localizedPath("/demo/objects/", locale)} aria-current={active === "objects" ? "page" : undefined}>OBJECTS</a>
+    <a href={localizedPath("/demo/space/", locale)} aria-current={active === "space" ? "page" : undefined}>3D SPACE</a>
+  </div>
+</nav>

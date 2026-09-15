@@ -1,0 +1,73 @@
+---
+import { indexItems, localizedPath, type Locale } from "../content/home";
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
+---
+
+<section
+  class="index-panel"
+  id="index-panel"
+  aria-label="Index"
+  aria-hidden="true"
+  inert
+>
+  <div class="index-panel__backdrop" data-index-backdrop aria-hidden="true"></div>
+
+  <div class="index-panel__surface">
+    <div class="index-panel__content">
+      <nav aria-label="All sections">
+        <ol class="index-list">
+          {
+            indexItems.map((item, index) => {
+              const Entry = item.href ? "a" : "div";
+              return (
+              <li class="index-list__item">
+                <Entry
+                  class="index-list__link"
+                  href={item.href ? localizedPath(item.href, locale) : undefined}
+                  data-index-link={index}
+                  data-unavailable={!item.href ? "true" : undefined}
+                  role={!item.href ? "group" : undefined}
+                  tabindex={!item.href ? 0 : undefined}
+                  aria-label={!item.href && "status" in item ? `${item.label}, ${item.status}` : undefined}
+                  aria-current={item.href === currentPath ? "page" : undefined}
+                >
+                  <span class={`index-list__media index-list__media--${index + 1}`} aria-hidden="true">
+                    <img
+                      src={item.imageSrc}
+                      alt=""
+                      width="720"
+                      height="1280"
+                      loading="eager"
+                      decoding="async"
+                      fetchpriority="low"
+                    />
+                    <video
+                      class="index-list__video"
+                      muted
+                      loop={item.loop}
+                      playsinline
+                      preload="none"
+                      poster={item.imageSrc}
+                      width="720"
+                      height="1280"
+                      data-index-video
+                      data-video-src={item.videoSrc}
+                    ></video>
+                  </span>
+                  <span class="index-list__label">
+                    {item.label}
+                    {"status" in item && <span class="index-list__status">{item.status}</span>}
+                  </span>
+                </Entry>
+              </li>
+              );
+            })
+          }
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>

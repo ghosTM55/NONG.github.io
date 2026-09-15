@@ -1,0 +1,270 @@
+{
+  "archivedOn": "2026-09-15",
+  "reason": "Historical assets not referenced by current source or production build",
+  "files": [
+    {
+      "original": "public/assets/cover-bg.png",
+      "archived": "design/asset-archive/2026-09-15/public/assets/cover-bg.png",
+      "bytes": 2157384,
+      "sha256": "8fc8402cb85acb6958b6ec6c27721504a3fcb18e3b38279ead0836a1ca92cb36"
+    },
+    {
+      "original": "public/assets/curation/pali-manuscript-india.jpg",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation/pali-manuscript-india.jpg",
+      "bytes": 96747,
+      "sha256": "cbf7ad3ad2282d10277e8cb810ed509367848101a251b4bd0157a8083a9b511d"
+    },
+    {
+      "original": "public/assets/curation/pali-manuscript-nepal.jpg",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation/pali-manuscript-nepal.jpg",
+      "bytes": 1135768,
+      "sha256": "2c12f3778c3f7f0330989b6467793975a14ac95b5481da2beed8a186b2fa07bb"
+    },
+    {
+      "original": "public/assets/curation/pali-manuscript-south-india.jpg",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation/pali-manuscript-south-india.jpg",
+      "bytes": 55901,
+      "sha256": "26c70af951cbeba994f4084858ddccb574e5b553909906e7c94bcdd2051677b9"
+    },
+    {
+      "original": "public/assets/curation/prajnaparamita-folio.jpg",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation/prajnaparamita-folio.jpg",
+      "bytes": 7630450,
+      "sha256": "f4f49a786180e868aa80036e351b6967c69edad211ded1885df28ff4cbe99a8e"
+    },
+    {
+      "original": "public/assets/curation-space/draco/draco_decoder.wasm",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation-space/draco/draco_decoder.wasm",
+      "bytes": 285747,
+      "sha256": "c55a594e8ffd18426d36b27fea9618af3df5e173640a3e56d46f09d76f0574f2"
+    },
+    {
+      "original": "public/assets/curation-space/draco/draco_wasm_wrapper.js",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation-space/draco/draco_wasm_wrapper.js",
+      "bytes": 58763,
+      "sha256": "e8049906ef3f8f75d3456c22a3f31bfdfe5b5b5bd09ccdec613b9e9a49d554d8"
+    },
+    {
+      "original": "public/assets/curation-space/models/cosmic-buddha-smithsonian.glb",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation-space/models/cosmic-buddha-smithsonian.glb",
+      "bytes": 907128,
+      "sha256": "bc3d4d242f22959e2e2bae8267267d51a499752b691637bf7cce70f9570b8b88"
+    },
+    {
+      "original": "public/assets/curation-space/reference/anhui-atrium-reference.jpg",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation-space/reference/anhui-atrium-reference.jpg",
+      "bytes": 2363139,
+      "sha256": "df24716c9b9679cf5707bba374afdc8ed18ddc5e05a0f8f4e69ae190a78679f3"
+    },
+    {
+      "original": "public/assets/curation-space/reference/anhui-courtyard-reference.jpg",
+      "archived": "design/asset-archive/2026-09-15/public/assets/curation-space/reference/anhui-courtyard-reference.jpg",
+      "bytes": 2410042,
+      "sha256": "f2b6f090bdf3ea67a34d9bbb93dd1c75dfe617804b1213bf993d59eac9b3efbb"
+    },
+    {
+      "original": "public/assets/fangting-water-courtyard/anhui-pavilion-bai-shiyuan-display-v1.png",
+      "archived": "design/asset-archive/2026-09-15/public/assets/fangting-water-courtyard/anhui-pavilion-bai-shiyuan-display-v1.png",
+      "bytes": 2035706,
+      "sha256": "9f71ede03417959d375592df7a6b3908b7e5102c4abaf90d372f90d333ebe2a4"
+    },
+    {
+      "original": "public/assets/fangting-water-courtyard/anhui-pavilion-bai-shiyuan-display-v2.png",
+      "archived": "design/asset-archive/2026-09-15/public/assets/fangting-water-courtyard/anhui-pavilion-bai-shiyuan-display-v2.png",
+      "bytes": 2102555,
+      "sha256": "0bbc52364e73d7f078095a2370dd0fe0de54d862eea32edeef08bf0d84f0cedd"
+    },
+    {
+      "original": "public/assets/fangting-water-courtyard/anhui-pavilion-interior-v1.png",
+      "archived": "design/asset-archive/2026-09-15/public/assets/fangting-water-courtyard/anhui-pavilion-interior-v1.png",
+      "bytes": 2013098,
+      "sha256": "37239a85dcf99e1aed0d510dd13dc4b83481af4bf4729f9e7fa9f1334f68a890"
+    },
+    {
+      "original": "public/assets/index/curation.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/curation.mp4",
+      "bytes": 1042148,
+      "sha256": "1d7094b9a2c5ae9c2ab6760510116e76b218a834e1304b4539f8fb6fc495e635"
+    },
+    {
+      "original": "public/assets/index/curation.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/curation.webp",
+      "bytes": 170978,
+      "sha256": "2a55e4d964a9f0a29743a0008a33f48df311eeb0a847ad90771196c2df2db180"
+    },
+    {
+      "original": "public/assets/index/intro.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/intro.mp4",
+      "bytes": 541035,
+      "sha256": "cc4033828177a556a1dff57c7c94dc98dfdfc32bade12c29b8ed119ff97c5770"
+    },
+    {
+      "original": "public/assets/index/intro.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/intro.webp",
+      "bytes": 97572,
+      "sha256": "0d0ce03190d24cdb0f13d179faa2c8b9522d4879ed18a36def2c9b7cc8fc1589"
+    },
+    {
+      "original": "public/assets/index/originals.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/originals.mp4",
+      "bytes": 554694,
+      "sha256": "cdc7e3426ebb2f75b642b30ee370853f24823fb0864fd6d305e043a11d90a8cb"
+    },
+    {
+      "original": "public/assets/index/originals.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/originals.webp",
+      "bytes": 82196,
+      "sha256": "f8df3fd2789cda2be5bb6b26b0a7daf1813c85062da73435ae9386f8bab7499b"
+    },
+    {
+      "original": "public/assets/index/partnerships.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/partnerships.mp4",
+      "bytes": 451433,
+      "sha256": "f407344da2f51de7a0644354b06a8920b7dd50dc25f4b5f6b52e07b30cad647a"
+    },
+    {
+      "original": "public/assets/index/partnerships.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/partnerships.webp",
+      "bytes": 110406,
+      "sha256": "2759630409817e3593e805c5f403f98253a27ee1df9dd79cd0ec72c429b4175b"
+    },
+    {
+      "original": "public/assets/index/round-03/intro.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-03/intro.mp4",
+      "bytes": 686139,
+      "sha256": "ca5a88b7131b93a4d98caad6cf694a319a40f14975ef8362bb52d60a5a354349"
+    },
+    {
+      "original": "public/assets/index/round-03/intro.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-03/intro.webp",
+      "bytes": 68026,
+      "sha256": "b32f644b45e8dade84921ee5acb0b0918cf1eb9327332a7a0dc3221823726115"
+    },
+    {
+      "original": "public/assets/index/round-03/originals.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-03/originals.mp4",
+      "bytes": 602484,
+      "sha256": "0367eeb3b2253687e23e578785a20e79038eaa489d4f5184502abd9ea2c4e26b"
+    },
+    {
+      "original": "public/assets/index/round-03/originals.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-03/originals.webp",
+      "bytes": 42138,
+      "sha256": "93906c5889a08d8032ae7f7008e751d0e6dc97f2352bd787ec54da4261750e9d"
+    },
+    {
+      "original": "public/assets/index/round-03/partnerships.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-03/partnerships.mp4",
+      "bytes": 1140510,
+      "sha256": "9e46564c96a9221d118d26df3baf4fc9c299879d9e535ecb7116ea798354d05e"
+    },
+    {
+      "original": "public/assets/index/round-03/partnerships.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-03/partnerships.webp",
+      "bytes": 67794,
+      "sha256": "4111f09d4bf8f60d6eebdbf914a79704d1ef994b7244a4c52e69fbd985c908e9"
+    },
+    {
+      "original": "public/assets/index/round-04/intro.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-04/intro.mp4",
+      "bytes": 1026989,
+      "sha256": "35036eff096e3775876d86a490a88fa7f8b870514df19b18b33641c867b75a48"
+    },
+    {
+      "original": "public/assets/index/round-04/intro.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-04/intro.webp",
+      "bytes": 67454,
+      "sha256": "a261aa7325b0ba79fac91d940090eda8b21bf1ff6927f4a70216b9fc899972c7"
+    },
+    {
+      "original": "public/assets/index/round-04/originals.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-04/originals.mp4",
+      "bytes": 502682,
+      "sha256": "78312da4c76dd715281aa84bd5babc44815b360ce02aca7b69ce8e6c3c2aca04"
+    },
+    {
+      "original": "public/assets/index/round-04/originals.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-04/originals.webp",
+      "bytes": 42696,
+      "sha256": "bbde68aaca461d29bd10f127ff197d340619ed4b8531c61db00401eae70bd2aa"
+    },
+    {
+      "original": "public/assets/index/round-04/partnerships.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-04/partnerships.mp4",
+      "bytes": 936783,
+      "sha256": "df49aa33d72e87f91ec601a8398db372431e9bcfe31ada12d1d1bd5586c5ce36"
+    },
+    {
+      "original": "public/assets/index/round-04/partnerships.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/index/round-04/partnerships.webp",
+      "bytes": 108188,
+      "sha256": "35c9371274f2689776f8e924566e31256546f3c7ec9bebfd7cbfa74c1e85e37d"
+    },
+    {
+      "original": "public/assets/intro/round-01/activation.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/intro/round-01/activation.mp4",
+      "bytes": 1684054,
+      "sha256": "f8c486966363287c3d8fd4bddad2c5632cf4601eee180a2f0da47998eecdcdd6"
+    },
+    {
+      "original": "public/assets/intro/round-01/activation.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/intro/round-01/activation.webp",
+      "bytes": 90200,
+      "sha256": "c088d72d25ea47ec24da8018706f5f224d3708cff16e7dc2ab6e688e00352490"
+    },
+    {
+      "original": "public/assets/intro/round-01/digitalization.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/intro/round-01/digitalization.mp4",
+      "bytes": 609055,
+      "sha256": "e012c7e5ef0dc896982ca9ff53126c56e90e30628750aae3f1f828d99c065ff9"
+    },
+    {
+      "original": "public/assets/intro/round-01/digitalization.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/intro/round-01/digitalization.webp",
+      "bytes": 48658,
+      "sha256": "e90275804ab6071d63423c49237525f59731ed309e010f4ab52ac110d843799d"
+    },
+    {
+      "original": "public/assets/intro/round-02/digitalization.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/intro/round-02/digitalization.mp4",
+      "bytes": 602399,
+      "sha256": "7956884f6c653af475cd13c4c4752f0dd51b4d73755b350ce375235a2497b842"
+    },
+    {
+      "original": "public/assets/intro/round-02/digitalization.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/intro/round-02/digitalization.webp",
+      "bytes": 32522,
+      "sha256": "a0d67c9f75f3346b334e49930de2c4fad982e40e7ca90385ba68b4a2edc1233d"
+    },
+    {
+      "original": "public/assets/monster-collector-film-ip-v1.png",
+      "archived": "design/asset-archive/2026-09-15/public/assets/monster-collector-film-ip-v1.png",
+      "bytes": 2415437,
+      "sha256": "7151d42d976f4edeac36baed59ba7207b799955e197c4f73deb18c4357c52f44"
+    },
+    {
+      "original": "public/assets/partnerships/osaka-uk-pavilion.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/partnerships/osaka-uk-pavilion.webp",
+      "bytes": 73144,
+      "sha256": "2f3d41cf4a4a8126b08c19ed966b92c8f37ec8e7d44a4688913e7e59859f90b9"
+    },
+    {
+      "original": "public/assets/partnerships/realnpc-qin-demo.mp4",
+      "archived": "design/asset-archive/2026-09-15/public/assets/partnerships/realnpc-qin-demo.mp4",
+      "bytes": 2683520,
+      "sha256": "f38043d08d581f8e41bb614742bf8eaf0c93b5d672e903b4364a77dae0b8a336"
+    },
+    {
+      "original": "public/assets/partnerships/realnpc-qin-poster.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/partnerships/realnpc-qin-poster.webp",
+      "bytes": 61344,
+      "sha256": "9ff4c03c47dd36fbf1c0bf56b015e5f6517425386f72f79ed7ead73b0dd38678"
+    },
+    {
+      "original": "public/assets/partnerships/smithsonian.webp",
+      "archived": "design/asset-archive/2026-09-15/public/assets/partnerships/smithsonian.webp",
+      "bytes": 242264,
+      "sha256": "b006a01282cbe423e3e418b7cce1da79c8c3c136d2a0cba09d831156026c0f20"
+    }
+  ]
+}

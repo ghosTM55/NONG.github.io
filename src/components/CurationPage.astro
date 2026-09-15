@@ -1,0 +1,74 @@
+---
+import PageTitle from "./PageTitle.astro";
+import ChapterNavigation from "./ChapterNavigation.astro";
+import "../styles/curation-page.css";
+
+const projects = [
+  {
+    id: "tanbo",
+    title: "Tanbo Museum",
+    category: "Museum project",
+    image: "/assets/curation/tanbo-concept.webp",
+    alt: "Concept study of a museum gallery connecting historic objects, manuscripts and digital interpretation.",
+    description: "A museum project connecting Silk Road heritage with contemporary audiences through exhibitions, storytelling and digital experiences.",
+    role: "Full responsibility across",
+    responsibilities: ["Cultural asset development & management", "Digitalization", "Ongoing operations"],
+  },
+  {
+    id: "upverse",
+    title: "UpVerse",
+    category: "Exhibition & festival",
+    image: "/assets/curation/upverse-concept.webp",
+    alt: "Concept study of a cross-disciplinary festival, with screenings, live music and creative encounters sharing one space.",
+    description: "A cross-disciplinary exhibition and festival where technology meets film, games and music, bringing creators and audiences together.",
+    role: "Our role",
+    responsibilities: ["Event organizer"],
+  },
+];
+---
+
+<main class="studio-page studio-page--section curation-page">
+  <header class="curation-heading">
+    <PageTitle number="02" label="Exhibitions & festivals" title="CURATION" />
+    <p>Projects in development</p>
+  </header>
+
+  <div class="curation-projects">
+    {projects.map(project => (
+      <article class="curation-project" aria-labelledby={`${project.id}-title`}>
+        <header class="curation-project__heading">
+          <h2 id={`${project.id}-title`}>{project.title}</h2>
+          <p>{project.category}</p>
+        </header>
+        <div class="curation-project__body">
+          <figure class="curation-project__visual">
+            <img
+              src={project.image}
+              srcset={`/assets/curation/${project.id}-concept-600.webp 600w, /assets/curation/${project.id}-concept-900.webp 900w, ${project.image} 1200w`}
+              sizes="(max-width: 680px) calc(100vw - 48px), (max-width: 980px) 45vw, (max-width: 1680px) 48vw, 812px"
+              alt={project.alt}
+              width="1200"
+              height="675"
+              loading={project.id === "tanbo" ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </figure>
+          <div class="curation-project__copy">
+            <p class="curation-project__description">{project.description}</p>
+            <section class="curation-project__responsibilities" aria-labelledby={`${project.id}-role`}>
+              <h3 id={`${project.id}-role`}>{project.role}</h3>
+              <ul>{project.responsibilities.map(responsibility => <li>{responsibility}</li>)}</ul>
+            </section>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <aside class="curation-forthcoming" aria-labelledby="curation-forthcoming-title">
+    <h2 id="curation-forthcoming-title">More to come.</h2>
+    <p>Further details will follow as the projects take shape.</p>
+  </aside>
+
+  <ChapterNavigation next={{ title: "Partnerships", href: "/partnerships/", number: "03" }} />
+</main>

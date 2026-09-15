@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+import "../styles/site-pages.css";
+import type { Locale } from "../content/home";
+import Masthead from "../components/Masthead.astro";
+import IndexPanel from "../components/IndexPanel.astro";
+import SiteBackground from "../components/SiteBackground.astro";
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+}
+
+const {
+  locale,
+  title = "NONG Studio",
+  description = "NONG Studio official website",
+  bodyClass,
+} = Astro.props;
+const htmlLang = locale === "zh" ? "zh-CN" : "en";
+const pagePath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
+const isLanding = pagePath === "/";
+const flow = pagePath === "/intro/" || pagePath === "/contact/" ? "intro" : pagePath === "/curation/" || pagePath === "/partnerships/" ? "curation" : undefined;
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/fonts/Tektur/Tektur-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="NONG Studio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(pagePath, Astro.site)} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#081A14" />
+  </head>
+  <body class:list={[bodyClass, { "site-content-page": !isLanding, "site-flow-page": !!flow }]}>
+    <SiteBackground animated={isLanding} flow={flow} />
+    <Masthead locale={locale} />
+    <slot />
+    <IndexPanel locale={locale} />
+    <script src="../motion/navigation.ts"></script>
+  </body>
+</html>

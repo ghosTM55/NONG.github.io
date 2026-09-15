@@ -1,0 +1,13 @@
+---
+interface Props {
+  motif: "bar" | "diamond" | "ring";
+}
+
+const { motif } = Astro.props;
+---
+
+<div class="intro-divider" aria-hidden="true" data-intro-divider>
+  <span class="intro-divider__symbol">
+    <span class:list={["intro-divider__mark", `intro-divider__mark--${motif}`]}></span>
+  </span>
+</div>

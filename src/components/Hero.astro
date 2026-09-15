@@ -1,0 +1,78 @@
+---
+import { heroPractices } from "../content/home";
+import NavigationMark from "./NavigationMark.astro";
+const positions = ["active", "next", "previous"] as const;
+---
+
+<main class="hero" id="home">
+  <div class="hero-practices">
+  <section class="hero-copy" aria-labelledby="hero-title">
+    <h1 class="hero-copy__ip" id="hero-title">IP</h1>
+    <div class="word-stage" aria-live="off" data-hero-roll>
+      {
+        heroPractices.map((practice, index) => (
+          <button
+            class="rolling-word"
+            type="button"
+            data-index={index}
+            data-position={positions[index]}
+            aria-pressed={index === 0 ? "true" : "false"}
+          >
+            {practice.label}
+          </button>
+        ))
+      }
+      <div class="roll-progress" aria-hidden="true" data-roll-progress></div>
+    </div>
+  </section>
+
+  <aside class="hero-context" aria-label="Current IP practice" aria-live="off">
+    <canvas class="hero-context__indicator" data-hero-indicator aria-hidden="true"></canvas>
+    <div class="hero-context__body">
+      {
+        heroPractices.map((practice, index) => (
+          <div
+            class="hero-context__item"
+            data-hero-context-item
+            data-active={index === 0 ? "true" : "false"}
+            aria-hidden={index === 0 ? "false" : "true"}
+          >
+            <p class="hero-context__description">
+              {practice.description.split("\n").map((line, lineIndex) => (
+                <>{lineIndex > 0 && " "}<span class="hero-context__line">{line}</span></>
+              ))}
+            </p>
+            <ul class="hero-context__scopes" aria-label="Scope">
+              {practice.scopes.map((scope) => <li>{scope}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </aside>
+  </div>
+
+  <footer class="hero-footer">
+    <button
+      class="hero-index-entry"
+      type="button"
+      aria-label="Explore our world"
+      aria-controls="index-panel"
+      aria-expanded="false"
+      data-index-trigger
+      data-navigation-action
+      data-closed-label="Explore our world"
+    >
+      <NavigationMark kind="index" />
+      <span class="hero-index-entry__label" aria-hidden="true">
+        <span class="hero-index-entry__word hero-index-entry__word--lead">
+          EXPLORE
+        </span>
+        <span class="hero-index-entry__word">OUR</span>
+        <span class="hero-index-entry__word hero-index-entry__word--accent">
+          WORLD
+        </span>
+      </span>
+    </button>
+  </footer>
+</main>

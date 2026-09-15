@@ -1,0 +1,10 @@
+# Partnerships — separated curtains
+
+Generated with the imagegen skill / built-in image generation, using round-03
+Partnerships only as a material, lighting and palette reference.
+
+Output: `03-partnerships.png`. Intro and Originals keep their round-03 PNGs.
+
+## Exact image prompt
+
+Use case: ads-marketing. Create one new photorealistic cinematic 9:16 portrait first-frame image for NONG Studio's Partnerships navigation chapter. The reference is ONLY a reference for tactile material, warm amber backlight, muted forest green and ivory colors, soft analog film grain and quiet art-house atmosphere. CHANGE THE COMPOSITION: exactly TWO SEPARATE long lightweight curtain panels hang vertically, one forest-green on the left and one warm unbleached ivory on the right, both attached above the frame, with a clearly visible narrow dark gap between their inner edges all the way down. They are NOT tied, NOT intertwined, NOT touching, NOT crossed. They are real full-width curtains with gathered vertical folds, not narrow ribbons, rope, scarfs or floating cloth strips. Intimate close crop, no window frame or room architecture. Both inner edges lie within the central 50% of the portrait so the two distinct materials and the gap remain readable in a narrow website crop. The panels hang freely with gently curved hems near the lower third, with space for them later to billow inward and wind around each other in the video. FIRST FRAME is the calm moment just before the breeze: gravity-draped, distinct separated panels, no blurred motion. Warm natural side/back light reveals translucent ivory weave and olive fibers; background recedes into deep green-black. Bottom 15% quiet and darker for overlay title, but render no text. Preserve the restrained photographic realism and material quality of the reference, not its already knotted shape. No people, hands, body parts, human silhouettes or shadows, animals, coins, props, patterns, logos, lettering or watermark. Not CGI, not magic, not abstract geometry. Single image, no collage.

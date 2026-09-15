@@ -1,0 +1,63 @@
+.chapter-navigation { margin-top: 16px; scroll-margin-top: calc(var(--index-panel-top) + 90px); }
+.chapter-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4.5vw, 72px); }
+.chapter-link {
+  --chapter-order: 0;
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 0 12px;
+  border: 0;
+  background: none;
+  color: var(--paper);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.chapter-link::before, .chapter-link::after { position: absolute; inset: 0 0 auto; height: 1px; background: var(--gold); content: ""; }
+.chapter-link::before { opacity: 0.28; }
+.chapter-link::after { transform: scaleX(0.16); transform-origin: left; }
+.chapter-link__eyebrow { display: flex; align-items: baseline; gap: 16px; color: var(--muted); font-size: 11px; line-height: 1.5; letter-spacing: 0.04em; }
+.chapter-link__number { color: var(--gold); font-variant-numeric: tabular-nums; }
+.chapter-link__symbol { display: grid; height: 100px; margin-block: 18px 14px; place-items: center; color: var(--gold); }
+.chapter-link__title { font-size: clamp(28px, 3.8vw, 58px); font-weight: 500; line-height: 1.15; letter-spacing: -0.045em; white-space: nowrap; }
+.chapter-link--index { --chapter-order: 1; align-items: center; text-align: center; }
+.chapter-link--index::after { transform-origin: center; }
+.chapter-link--index .chapter-link__title { font-size: clamp(24px, 2.8vw, 42px); line-height: calc(1.15 * 3.8 / 2.8); }
+.chapter-link--next { --chapter-order: 2; align-items: flex-end; color: var(--gold); text-align: right; }
+.chapter-link--next::after { transform-origin: right; }
+.chapter-link:active { color: var(--gold); }
+.chapter-link:active .chapter-link__title { opacity: 0.65; }
+
+@media (hover: hover) and (pointer: fine) {
+  .chapter-link:hover { color: var(--gold); }
+  .chapter-link:hover::after { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .chapter-link { transition: color 180ms ease; }
+  .chapter-link::after { transition: transform 450ms var(--ease-out); }
+  .chapter-navigation[data-chapter-motion-ready] .chapter-link::before { transform: scaleX(0); transform-origin: center; transition: transform 800ms var(--ease-out) calc(var(--chapter-order) * 70ms); }
+  .chapter-navigation[data-chapter-motion-ready] .chapter-link__symbol { opacity: 0; transform: translateY(12px); transition: transform 700ms var(--ease-out) calc(var(--chapter-order) * 70ms), opacity 500ms ease calc(var(--chapter-order) * 70ms); }
+  .chapter-navigation[data-chapter-motion-ready].is-revealed .chapter-link::before { transform: scaleX(1); }
+  .chapter-navigation[data-chapter-motion-ready].is-revealed .chapter-link__symbol { opacity: 1; transform: translateY(0); }
+  .chapter-navigation[data-chapter-motion-ready]:focus-within .chapter-link::before { transform: scaleX(1); transition: none; }
+  .chapter-navigation[data-chapter-motion-ready]:focus-within .chapter-link__symbol { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 680px) {
+  .chapter-navigation { margin-top: 8px; }
+  .chapter-nav { gap: 16px; }
+  .chapter-link { padding-top: 18px; }
+  .chapter-link__eyebrow { gap: 5px; max-width: 11ch; min-height: 32px; font-size: 10px; line-height: 1.6; letter-spacing: 0; }
+  .chapter-link--next .chapter-link__eyebrow { max-width: 100%; justify-content: flex-end; }
+  .chapter-link__symbol { --navigation-mark-width: 56px; --navigation-mark-stroke: 2.5; height: 62px; margin-block: 12px; }
+  .chapter-link__title, .chapter-link--index .chapter-link__title { font-size: clamp(18px, 4.7vw, 30px); line-height: 1.15; }
+  .chapter-link__explore, .chapter-link__chapter-word { display: none; }
+  .chapter-link--index .chapter-link__symbol { --navigation-mark-width: 72.8px; }
+}
+
+.chapter-link:focus-visible { color: var(--gold); transition: none; outline-offset: 8px; }
+.chapter-link:focus-visible::after { transform: scaleX(1); transition: none; }

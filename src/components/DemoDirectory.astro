@@ -1,0 +1,33 @@
+---
+import { localizedPath, type Locale } from "../content/home";
+import ChapterNavigation from "./ChapterNavigation.astro";
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const zh = locale === "zh";
+---
+<main class="studio-page">
+  <header class="page-intro">
+    <div><p class="page-eyebrow">INTERACTIVE EXPLORATIONS</p><h1>DEMOS</h1></div>
+    <p class="page-intro__copy">{zh ? "从一件藏品到一个展览空间，探索两种数字体验。" : "From a single object to an exhibition space. Explore two interactive prototypes."}</p>
+  </header>
+  <div class="demo-directory">
+    <a class="demo-preview" href={localizedPath("/demo/objects/", locale)}>
+      <div class="demo-preview__image demo-preview__image--object"><img src="/assets/curation/prajnaparamita-folio.webp" alt={zh ? "彩绘贝叶经书页" : "Painted palm-leaf manuscript"} width="2400" height="1394" decoding="async" /></div>
+      <div class="demo-preview__caption"><div><p class="page-eyebrow">DIGITAL HERITAGE · DEMO</p><h2>{zh ? "数字藏品" : "Digital objects"}</h2></div><span class="demo-preview__arrow" aria-hidden="true">↗</span></div>
+      <p class="demo-preview__copy">{zh ? "探索藏品细节、切换视角、查看注释与数字档案。" : "Inspect object details, switch views and explore annotations and collection records."}</p>
+    </a>
+    <a class="demo-preview" href={localizedPath("/demo/space/", locale)}>
+      <div class="demo-preview__image demo-preview__image--space" aria-hidden="true">
+        <svg viewBox="0 0 480 290" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="m55 162 170-94 200 101-170 98Z" fill="currentColor" fill-opacity="0.04" />
+          <path d="M55 162V91l170-64 200 70v72M225 27v41M55 91l200 72 170-66M255 163v104" opacity="0.65" />
+          <path d="m134 163 97-51 113 57-97 54Z" fill="currentColor" fill-opacity="0.12" />
+          <path d="m134 163 113 47 97-41M247 210v13M90 143V91m39 33V76m39 28V63m39 21V50M291 144V97m39 27V85m39 19V71m39 13V60" opacity="0.45" />
+        </svg>
+      </div>
+      <div class="demo-preview__caption"><div><p class="page-eyebrow">ANHUI PAVILION · DEMO</p><h2>{zh ? "三维展览空间" : "Spatial experience"}</h2></div><span class="demo-preview__arrow" aria-hidden="true">↗</span></div>
+      <p class="demo-preview__copy">{zh ? "进入安徽馆原型，自由探索空间与展品故事。" : "Enter the Anhui Pavilion prototype and navigate its gallery and collection stories."}</p>
+    </a>
+  </div>
+  <ChapterNavigation next={{ title: "Intro", href: "/intro/", context: "Explore our practices", number: "01" }} />
+</main>

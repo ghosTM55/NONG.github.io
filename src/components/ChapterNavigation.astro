@@ -1,0 +1,32 @@
+---
+import "../styles/chapter-navigation.css";
+import NavigationMark from "./NavigationMark.astro";
+
+interface Props {
+  next: { title: string; href: string; number?: string; context?: string; };
+}
+const { next } = Astro.props;
+---
+
+<footer class="chapter-navigation" id="chapter-navigation" data-chapter-navigation>
+  <nav class="chapter-nav" aria-label="Chapter navigation">
+    <a class="chapter-link" href="/" aria-label="Return to landing page" data-navigation-action>
+      <span class="chapter-link__eyebrow">Return to start</span>
+      <span class="chapter-link__symbol"><NavigationMark kind="left" /></span>
+      <span class="chapter-link__title">Landing</span>
+    </a>
+    <button class="chapter-link chapter-link--index" type="button" data-navigation-action data-index-trigger aria-controls="index-panel" aria-expanded="false" aria-label="Explore Index" data-closed-label="Explore Index">
+      <span class="chapter-link__eyebrow">Explore our world</span>
+      <span class="chapter-link__symbol"><NavigationMark kind="index" /></span>
+      <span class="chapter-link__title"><span class="chapter-link__explore">Explore </span>Index</span>
+    </button>
+    <a class="chapter-link chapter-link--next" href={next.href} aria-label={`${next.context ?? "Next chapter"}: ${next.title}`} data-navigation-action>
+      <span class="chapter-link__eyebrow">
+        <span>{next.context ?? <>Next<span class="chapter-link__chapter-word"> chapter</span></>}</span>
+        {next.number && <span class="chapter-link__number">{next.number}</span>}
+      </span>
+      <span class="chapter-link__symbol"><NavigationMark kind="right" /></span>
+      <span class="chapter-link__title">{next.title}</span>
+    </a>
+  </nav>
+</footer>
