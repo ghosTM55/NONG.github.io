@@ -10,7 +10,7 @@ Visitors, cultural organizations, rights holders, and prospective creative partn
 
 ## Product Purpose
 
-Present NONG Studio through a single-screen landing page, then guide visitors into a visual Index covering Intro, Curation, Partnerships, Originals, and Contact. Intro is a separate overview of IP Development, Digitalization and Activation. Curation is reserved for the formal exhibition content; the existing interactive prototypes live under Demo, accessed beside the email icon in the shared masthead. The site communicates the studio's work across culture, entertainment, and technology without inventing unsupported clients, cases, claims, or slogans.
+Present NONG Studio through a single-screen landing page, then guide visitors into a visual Index covering Intro, Curation, Partnerships, Originals, and Contact. Intro is a separate overview of IP Development, Digitalization and Activation. Curation is reserved for the formal exhibition content; the existing interactive prototypes live under Demo, accessed by entering `/demo/` directly, with no public navigation entry on desktop or mobile. This hides discovery, not access; navigation inside Demo remains available. The site communicates the studio's work across culture, entertainment, and technology without inventing unsupported clients, cases, claims, or slogans.
 
 ## Brand Personality
 
@@ -34,7 +34,7 @@ Maintain keyboard operability, visible focus states, semantic controls, sufficie
 
 ## Current Production Scope
 
-Work in English only until the content and design are approved. Chinese localization is deferred to a final, coordinated pass. Keep the language switcher hidden during this phase. Intro explains three practices through concise copy and illustrative moving images; these visuals are not completed-project claims.
+Work in English only until the content and design are approved. Chinese localization is deferred to a final, coordinated pass. Keep the language switcher hidden during this phase. Intro owns the explanation of NONG Studio's three core business practices: IP Development, IP Digitalization and IP Activation. Each can stand alone or connect within a project. Use concise copy and illustrative moving images; these visuals are not completed-project claims. Partnerships does not repeat the three practices in a separate section. Its character feature leads directly into “Imagine the possibilities”.
 
 Contact offers a visible, copyable `contact@nong.studio` address and four optional enquiry guides for Development, Digitalization, Activation and Strategic partnerships. Each guide opens a prefilled email to the same address. Links to an enquiry's fragment reveal that guide. Keep the direct route available for early ideas and cross-practice enquiries, with no required form or invented response-time promises. Reuse the shared page title, background and chapter navigation.
 

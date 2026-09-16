@@ -1,7 +1,7 @@
 ---
 import PageTitle from "./PageTitle.astro";
 import ChapterNavigation from "./ChapterNavigation.astro";
-import { immersiveProjects, characterCapabilities, partnershipPractices } from "../content/partnerships";
+import { immersiveProjects, characterCapabilities } from "../content/partnerships";
 import "../styles/partnerships-page.css";
 ---
 
@@ -105,28 +105,6 @@ import "../styles/partnerships-page.css";
         </div>
         <figcaption><span>Character concept / Our strategic partners</span><span>Image courtesy of RealNPC.</span></figcaption>
       </figure>
-    </div>
-  </section>
-
-  <section class="partnership-practices" aria-labelledby="partnership-practices-title">
-    <header class="partnership-practices__heading">
-      <p class="partnerships-label">Across our three practices</p>
-      <h2 id="partnership-practices-title">The right expertise.<br /><span>One shared direction.</span></h2>
-      <p>NONG Studio shapes the IP direction, audience experience and program. Our strategic partners contribute specialist capabilities around the needs of each project.</p>
-    </header>
-    <div class="partnership-practices__rows">
-      {partnershipPractices.map((practice, index) => (
-        <article class="partnership-practice" aria-labelledby={`practice-${index}`}>
-          <header>
-            <h3 id={`practice-${index}`}>IP {practice.title}</h3>
-            <p>{practice.outcome}</p>
-          </header>
-          <dl>
-            <div><dt>NONG Studio</dt><dd>{practice.nong}</dd></div>
-            <div><dt>Our strategic partners</dt><dd>{practice.partners}</dd></div>
-          </dl>
-        </article>
-      ))}
     </div>
   </section>
 

@@ -46,9 +46,9 @@ npm run preview
 - `/zh/intro/`: redirects to `/intro/` while localization is deferred. The language switcher is hidden; Chinese content will be handled after English content and design approval.
 - `/curation/`: concise previews of the Tanbo Museum and UpVerse projects in development. Page-specific layout and copy live in `src/components/CurationPage.astro` and `src/styles/curation-page.css`; image provenance is recorded in `design/curation-preview.md`.
 - `/zh/curation/`: redirects to `/curation/` while localization is deferred.
-- `/partnerships/`: capability-led page presenting our strategic partners through attributed projects, a static character concept and contributions across the three IP practices. An aspirational vision of what future partners could create together leads to `/contact/#partnerships`, which opens a dedicated enquiry guide. Asset sources and claim boundaries live in `design/partnerships-preview.md`. `/zh/partnerships/` redirects to the English page.
+- `/partnerships/`: capability-led page presenting our strategic partners through attributed projects and a static character concept. The character feature leads directly into an aspirational vision of what future partners could create together, with a link to `/contact/#partnerships` that opens a dedicated enquiry guide. The three business practices are explained in Intro. Asset sources and claim boundaries live in `design/partnerships-preview.md`. `/zh/partnerships/` redirects to the English page.
 - `/contact/`: direct email contact and four expandable enquiry guides, with prefilled emails for Development, Digitalization, Activation and Strategic partnerships. Content lives in `src/content/contact.ts`; native disclosures work without JavaScript, and fragment links reveal the matching guide with JavaScript enabled. `/zh/contact/` redirects here while localization is deferred.
-- `/demo/` and `/zh/demo/`: demo directory, accessed through the icon beside the masthead email control.
+- `/demo/` and `/zh/demo/`: unlisted demo directory, accessed by entering the URL directly. No public navigation entry is rendered on desktop or mobile. This is not access control; anyone with the URL can visit. Navigation within the demo area remains available.
 - `/demo/objects/` and `/demo/space/` (also available under `/zh/`): existing object and spatial demonstrations.
 - `/curation/demo/` and `/curation/space/`: compatibility redirects to the new demo routes.
 
@@ -83,6 +83,19 @@ is open, then resume when it closes. Their visible animation speed is unchanged.
 Browser regression tests are in `tests/browser/`. Run them after `npm run build`;
 Playwright starts a dedicated local preview on port 4323 and stops it afterward.
 CI runs the existing direction tests and browser regressions before deployment.
+
+On phones, the landing title and description share a single flowing layout below
+the masthead. Menu and email icons flank the centered wordmark in one row, with
+44px touch targets. Explore has a larger label and a minimum 74px touch height; short
+screens can scroll instead of overlapping or clipping content. Navigation marks
+respond to touch presses. On phone layouts and touch devices, Index uses horizontal
+rows with a square video on the left and a large chapter title on the right,
+automatically playing and looping every preview while Index is open. Titles are
+white by default; only the current page's chapter is gold. Phone-width mouse
+previews use the same playback and press feedback. Tapping a link navigates
+immediately. Videos load when needed, stop when Index closes or the tab is hidden,
+and retain static posters when reduced motion is enabled or playback is blocked.
+Desktop retains hover and keyboard-focus previews.
 
 ### Fonts and responsive images
 

@@ -23,10 +23,25 @@
   .navigation-mark__leaf { transition: transform 450ms var(--ease-out); }
 }
 
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 681px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   [data-navigation-action]:hover .navigation-mark svg:first-child { transform: translateX(var(--depart)); }
   [data-navigation-action]:hover .navigation-mark svg + svg { transform: translateX(0); }
   [data-navigation-action]:hover .navigation-mark__leaf { transform: translateX(calc(var(--leaf) * 79.1667%)) rotate(calc(var(--leaf) * 12deg)); }
+}
+
+@media (max-width: 680px) and (prefers-reduced-motion: no-preference), (hover: none) and (prefers-reduced-motion: no-preference), (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  [data-navigation-action]:active .navigation-mark svg:first-child { transform: translateX(calc(var(--depart) * 0.06)); transition-duration: 120ms; }
+  [data-navigation-action]:active .navigation-mark__leaf { transform: translateX(calc(var(--leaf) * 79.1667%)) rotate(calc(var(--leaf) * 12deg)); transition-duration: 120ms; }
+
+  .hero-index-entry .navigation-mark__leaf { animation: hero-index-fan 3.6s var(--ease-out) infinite; }
+  .is-index-open .hero-index-entry .navigation-mark__leaf { animation-play-state: paused; }
+  .hero-index-entry:active .navigation-mark__leaf,
+  .hero-index-entry:focus-visible .navigation-mark__leaf { animation: none; }
+}
+
+@keyframes hero-index-fan {
+  0%, 60%, 100% { transform: translateX(calc(var(--leaf) * 54.1667%)) rotate(0deg); }
+  20%, 40% { transform: translateX(calc(var(--leaf) * 79.1667%)) rotate(calc(var(--leaf) * 12deg)); }
 }
 
 [data-navigation-action]:focus-visible .navigation-mark svg:first-child { transform: none; transition: none; }

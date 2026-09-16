@@ -1,6 +1,6 @@
 export const introContent = {
   overview: "We develop original IP, build digital experiences and connect culture with audiences.",
-  approach: "From collections and creators to films, festivals and places, we bring content, technology and ongoing operations together.",
+  approach: "NONG Studio works across three core practices: IP Development, IP Digitalization and IP Activation. Each can stand alone or connect as a project grows.",
   practices: [
     {
       id: "development",

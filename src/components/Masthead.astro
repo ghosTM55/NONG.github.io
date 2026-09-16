@@ -9,7 +9,6 @@ const { locale } = Astro.props;
 const copyEmailLabel = locale === "zh" ? "复制邮箱地址" : "Copy email address";
 const copyEmailMessage = locale === "zh" ? "邮箱地址已复制" : "EMAIL ADDRESS COPIED";
 const copyEmailError = locale === "zh" ? "复制失败" : "COPY FAILED";
-const isDemo = Astro.url.pathname.replace(/^\/zh(?=\/)/, "").startsWith("/demo/");
 ---
 
 <header class="masthead" data-site-masthead>
@@ -53,17 +52,5 @@ const isDemo = Astro.url.pathname.replace(/^\/zh(?=\/)/, "").startsWith("/demo/"
       </svg>
       <span class="masthead__email-feedback" role="status" aria-live="polite" data-copy-email-status></span>
     </button>
-    <a
-      class="masthead__demo"
-      href={localizedPath("/demo/", locale)}
-      aria-label={locale === "zh" ? "浏览 Demo" : "Explore demos"}
-      aria-current={isDemo ? "true" : undefined}
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M8 3.5H3.5V8M16 3.5h4.5V8M20.5 16v4.5H16M8 20.5H3.5V16" />
-        <path d="m9 7 8 5-8 5Z" />
-      </svg>
-      <span class="masthead__demo-label" aria-hidden="true">DEMO</span>
-    </a>
   </div>
 </header>

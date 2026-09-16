@@ -32,48 +32,6 @@ html.is-index-open body.site-content-page {
   clip-path: inset(var(--index-panel-top) 0 0);
 }
 
-.masthead__demo {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 160ms ease, transform 140ms var(--ease-out);
-}
-
-.masthead__demo svg {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linejoin: miter;
-}
-
-.masthead__demo-label {
-  position: absolute;
-  top: calc(100% + 5px);
-  font-size: 8px;
-  font-weight: 650;
-  letter-spacing: 1px;
-  opacity: 0;
-  transition: opacity 160ms ease;
-  pointer-events: none;
-}
-
-.masthead__demo[aria-current],
-.masthead__demo:focus-visible {
-  color: var(--gold);
-}
-
-.masthead__demo:focus-visible .masthead__demo-label {
-  opacity: 1;
-}
-
-.masthead__demo:active { transform: scale(0.94); }
-
 .studio-page {
   max-width: 1680px;
   min-height: 100svh;
@@ -255,8 +213,6 @@ html.is-index-open body.site-content-page {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .masthead__demo:hover { color: var(--gold); }
-  .masthead__demo:hover .masthead__demo-label { opacity: 1; }
   .page-link:hover, .demo-preview:hover h2, .demo-nav a:hover { color: var(--gold); }
   .demo-nav__views a:hover::after { transform: scaleX(1); opacity: 1; }
   .demo-preview:hover .demo-preview__image--object img { transform: rotate(-6deg) scale(1.035); }
@@ -267,16 +223,15 @@ html.is-index-open body.site-content-page {
   .practice-symbol { width: 40px; height: 40px; }
 }
 
-@media (max-width: 680px) {
-  /* Keep the wordmark centred while utilities occupy a separate row. */
-  :root { --header-top: 22px; --index-panel-top: 126px; }
-  .masthead { left: 20px; right: 20px; height: 84px; }
+@media (max-width: 680px), (max-height: 500px) and (hover: none) and (pointer: coarse) {
+  :root { --header-top: 22px; --index-panel-top: 104px; }
+  .masthead { left: 20px; right: 20px; height: 44px; grid-template-columns: 44px minmax(0, 1fr) 44px; }
   .masthead__identity { width: max-content; }
-  .masthead__fields { top: calc(100% + 13px); }
-  .index-trigger, .masthead__utilities { margin-top: 52px; }
+  .masthead__brand { display: flex; align-items: center; justify-content: center; min-height: 44px; }
+  .masthead__fields { top: calc(100% + 6px); }
+  .index-trigger { width: 44px; justify-content: center; }
+  .index-trigger__label { display: none; }
   .masthead__utilities { gap: 12px; }
-  .masthead__demo { width: 30px; height: 30px; }
-  .masthead__demo-label { display: none; }
   .studio-page { padding: calc(var(--index-panel-top) + 38px) 24px 36px; }
   .page-intro { grid-template-columns: 1fr; gap: 28px; padding-bottom: 42px; }
   .page-intro__copy { font-size: 18px; line-height: 1.65; }
@@ -295,5 +250,5 @@ html.is-index-open body.site-content-page {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .masthead__demo, .demo-preview__image img { transition: none; }
+  .demo-preview__image img { transition: none; }
 }

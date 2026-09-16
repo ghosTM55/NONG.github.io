@@ -42,24 +42,3 @@ export const characterCapabilities = [
   { title: "A meaningful exchange", description: "AI dialogue shaped around the character, cultural context and audience." },
   { title: "A presence in your world", description: "Character experiences designed for exhibitions, cultural destinations and IP events." },
 ] as const;
-
-export const partnershipPractices = [
-  {
-    title: "Development",
-    outcome: "Give the story a world.",
-    nong: "IP direction, cultural research and worldbuilding.",
-    partners: "Experiential narratives, character design and interaction concepts.",
-  },
-  {
-    title: "Digitalization",
-    outcome: "Give the world a form.",
-    nong: "Digital content planning and cultural asset organization.",
-    partners: "Immersive media, animation and AI character experiences.",
-  },
-  {
-    title: "Activation",
-    outcome: "Bring people into it.",
-    nong: "Curation, audience engagement and ongoing programs.",
-    partners: "Spatial experiences, interactive installations and character encounters.",
-  },
-] as const;

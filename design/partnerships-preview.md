@@ -44,8 +44,9 @@ referenced by the page.
 - RealNPC copy focuses on character development and interaction. Roadmap features
   such as a complete runtime, persistent cross-device memory, an IP marketplace
   and a task network are not represented as shipped capabilities.
-- Three-practice rows describe the proposed collaboration model. “Imagine the
-  possibilities” invites prospective partners into a larger creative vision,
+- Intro owns the studio's three business practice descriptions. Partnerships
+  omits a separate practice section and moves from the character feature directly
+  into “Imagine the possibilities”, inviting prospective partners into a larger creative vision,
   without a division of work or a specific project implementation. The scroll
   artwork is captioned “An unwritten world, waiting to be explored.” It is an
   artistic metaphor, not an existing project by the studio or its partners.

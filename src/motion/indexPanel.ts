@@ -16,12 +16,17 @@ export function initIndexPanel(
   const entries = Array.from(panel.querySelectorAll<HTMLElement>("[data-index-link]"));
   const links = entries.filter((entry): entry is HTMLAnchorElement => entry instanceof HTMLAnchorElement);
   const videos = Array.from(panel.querySelectorAll<HTMLVideoElement>("[data-index-video]"));
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const desktopLoops = new Map(videos.map((video) => [video, video.loop]));
+  const playbackRequests = new Map<HTMLVideoElement, symbol>();
+  const hoverPreview = window.matchMedia("(min-width: 681px) and (hover: hover) and (pointer: fine)");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const eventRoot = root instanceof Document ? root : (root.ownerDocument ?? document);
   let returnFocusTrigger = triggers[0];
 
+  const canPlay = () => panel.getAttribute("aria-hidden") === "false" && !eventRoot.hidden && !reducedMotion.matches;
+
   const stopVideo = (video: HTMLVideoElement) => {
+    playbackRequests.delete(video);
     video.pause();
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
       video.currentTime = 0;
@@ -30,25 +35,44 @@ export function initIndexPanel(
   };
 
   const startVideo = (video: HTMLVideoElement) => {
-    if (!finePointer.matches || reducedMotion.matches) return;
+    if (!canPlay() || playbackRequests.has(video)) return;
+    if (hoverPreview.matches) stopAllVideos();
+    const request = Symbol();
+    playbackRequests.set(video, request);
 
     if (!video.hasAttribute("src")) {
       const source = video.dataset.videoSrc;
-      if (!source) return;
+      if (!source) return stopVideo(video);
       video.src = source;
       video.load();
     }
 
-    video.setAttribute("data-active", "true");
-    void video.play().catch(() => {
-      video.removeAttribute("data-active");
+    void video.play().then(() => {
+      // Closing Index or changing input mode can overtake a pending play request.
+      if (playbackRequests.get(video) !== request) {
+        if (!playbackRequests.has(video)) video.pause();
+        return;
+      }
+      if (!canPlay()) return stopVideo(video);
+      video.setAttribute("data-active", "true");
+    }).catch(() => {
+      if (playbackRequests.get(video) === request) stopVideo(video);
     });
   };
 
   const stopAllVideos = () => videos.forEach(stopVideo);
 
   const handleMediaPreferenceChange = () => {
-    if (!finePointer.matches || reducedMotion.matches) stopAllVideos();
+    stopAllVideos();
+    videos.forEach((video) => { video.loop = !hoverPreview.matches || desktopLoops.get(video)!; });
+    if (!canPlay()) return;
+    if (hoverPreview.matches) {
+      const entry = entries.find((entry) => entry.matches(":hover, :focus-visible"));
+      const video = entry?.querySelector<HTMLVideoElement>("[data-index-video]");
+      if (video) startVideo(video);
+    } else {
+      videos.forEach(startVideo);
+    }
   };
 
   const open = (event: Event) => {
@@ -65,6 +89,7 @@ export function initIndexPanel(
     main.setAttribute("inert", "");
     eventRoot.documentElement.classList.add("is-index-open");
     if (openedWithKeyboard) navTrigger.focus({ preventScroll: true });
+    handleMediaPreferenceChange();
   };
 
   const close = (returnFocus = true) => {
@@ -120,8 +145,8 @@ export function initIndexPanel(
     const video = link.querySelector<HTMLVideoElement>("[data-index-video]");
     if (!video) return () => undefined;
 
-    const start = () => startVideo(video);
-    const stop = () => stopVideo(video);
+    const start = () => { if (hoverPreview.matches) startVideo(video); };
+    const stop = () => { if (hoverPreview.matches) stopVideo(video); };
     link.addEventListener("pointerenter", start);
     link.addEventListener("pointerleave", stop);
     link.addEventListener("focus", start);
@@ -132,7 +157,7 @@ export function initIndexPanel(
       link.removeEventListener("pointerleave", stop);
       link.removeEventListener("focus", start);
       link.removeEventListener("blur", stop);
-      stop();
+      stopVideo(video);
     };
   });
 
@@ -142,7 +167,8 @@ export function initIndexPanel(
   triggers.forEach((trigger) => trigger.addEventListener("click", handleTriggerClick));
   eventRoot.addEventListener("keydown", handlePanelKeydown);
   eventRoot.addEventListener("pointerdown", handleOutsidePointerdown);
-  finePointer.addEventListener("change", handleMediaPreferenceChange);
+  eventRoot.addEventListener("visibilitychange", handleMediaPreferenceChange);
+  hoverPreview.addEventListener("change", handleMediaPreferenceChange);
   reducedMotion.addEventListener("change", handleMediaPreferenceChange);
 
   return () => {
@@ -153,8 +179,10 @@ export function initIndexPanel(
     triggers.forEach((trigger) => trigger.removeEventListener("click", handleTriggerClick));
     eventRoot.removeEventListener("keydown", handlePanelKeydown);
     eventRoot.removeEventListener("pointerdown", handleOutsidePointerdown);
-    finePointer.removeEventListener("change", handleMediaPreferenceChange);
+    eventRoot.removeEventListener("visibilitychange", handleMediaPreferenceChange);
+    hoverPreview.removeEventListener("change", handleMediaPreferenceChange);
     reducedMotion.removeEventListener("change", handleMediaPreferenceChange);
     videoBindings.forEach((removeListeners) => removeListeners());
+    videos.forEach((video) => { video.loop = desktopLoops.get(video)!; });
   };
 }
