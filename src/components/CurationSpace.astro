@@ -26,7 +26,7 @@ const objectTotal = String(spaceArtifacts.length).padStart(2, "0");
       <h1 id="space-title">ANHUI<br />PAVILION</h1>
       <p class="space-intro__zh">方厅水院 · 安徽馆</p>
       <p class="space-intro__copy">为快速演示收敛成闭合矩形展厅：中央水池、四周步道与靠墙影像展陈。进入空间后可自由行走，并查看每件作品的数字档案。</p>
-      <button type="button" class="space-enter" data-enter-space>
+      <button type="button" class="space-enter" data-enter-space disabled>
         <span><b>ENTER THE PAVILION</b><small>进入可探索场馆</small></span>
         <svg viewBox="0 0 48 18" aria-hidden="true"><path d="M0 9h45M37 1l8 8-8 8" /></svg>
       </button>
@@ -36,6 +36,11 @@ const objectTotal = String(spaceArtifacts.length).padStart(2, "0");
       <p><span>NAVIGATION</span><b>DRAG · WASD · SCROLL</b></p>
     </div>
   </section>
+
+  <div class="space-fallback" data-space-fallback hidden>
+    <p role="status">当前浏览器无法启动实时三维场景，已显示建筑效果图。</p>
+    <button type="button" data-space-retry hidden>Retry</button>
+  </div>
 
   <div class="space-hud" data-space-hud aria-hidden="true">
     <div class="space-position">

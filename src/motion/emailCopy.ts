@@ -2,7 +2,7 @@ const FEEDBACK_DURATION = 1800;
 
 export function initEmailCopy(root: ParentNode = document) {
   const cleanups = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-copy-email]")).map(button => {
-    const status = button.querySelector<HTMLElement>("[data-copy-email-status]");
+    const status = button.parentElement?.querySelector<HTMLElement>("[data-copy-email-status]");
 
     if (!status) return () => undefined;
 

@@ -22,6 +22,7 @@ const {
 const htmlLang = locale === "zh" ? "zh-CN" : "en";
 const pagePath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
 const isLanding = pagePath === "/";
+const shareImage = new URL("/assets/site-share.png", Astro.site);
 const flow = pagePath === "/intro/" || pagePath === "/contact/" ? "intro" : pagePath === "/curation/" || pagePath === "/partnerships/" ? "curation" : undefined;
 ---
 
@@ -38,9 +39,15 @@ const flow = pagePath === "/intro/" || pagePath === "/contact/" ? "intro" : page
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="NONG Studio" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
+    <meta name="twitter:image:alt" content="NONG Studio" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <link rel="alternate" hreflang="en" href={new URL(pagePath, Astro.site)} />
     <link rel="icon" href="/favicon.ico" />
@@ -50,9 +57,11 @@ const flow = pagePath === "/intro/" || pagePath === "/contact/" ? "intro" : page
   </head>
   <body class:list={[bodyClass, { "site-content-page": !isLanding, "site-flow-page": !!flow }]}>
     <SiteBackground animated={isLanding} flow={flow} />
-    <Masthead locale={locale} />
+    <div data-index-dialog>
+      <Masthead locale={locale} />
+      <IndexPanel locale={locale} />
+    </div>
     <slot />
-    <IndexPanel locale={locale} />
     <script src="../motion/navigation.ts"></script>
   </body>
 </html>

@@ -50,7 +50,7 @@ const copyEmailError = locale === "zh" ? "复制失败" : "COPY FAILED";
         <path d="M3.5 5.5h17v13h-17z" />
         <path d="m4.5 7 7.5 6 7.5-6" />
       </svg>
-      <span class="masthead__email-feedback" role="status" aria-live="polite" data-copy-email-status></span>
     </button>
+    <span class="masthead__email-feedback" role="status" aria-live="polite" aria-atomic="true" data-copy-email-status></span>
   </div>
 </header>

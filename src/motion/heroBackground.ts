@@ -175,35 +175,51 @@ export function initSiteBackground(root: ParentNode = document): () => void {
   });
   if (!gl) return () => undefined;
 
-  const vertex = compileShader(gl, gl.VERTEX_SHADER, vertexShader);
-  const fragment = compileShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
-  if (!vertex || !fragment) return () => undefined;
+  const createResources = () => {
+    const vertex = compileShader(gl, gl.VERTEX_SHADER, vertexShader);
+    const fragment = compileShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
+    const program = gl.createProgram();
+    if (!vertex || !fragment || !program) {
+      gl.deleteShader(vertex);
+      gl.deleteShader(fragment);
+      gl.deleteProgram(program);
+      return null;
+    }
+    gl.attachShader(program, vertex);
+    gl.attachShader(program, fragment);
+    gl.linkProgram(program);
+    gl.deleteShader(vertex);
+    gl.deleteShader(fragment);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error("Hero background program failed to link", gl.getProgramInfoLog(program));
+      gl.deleteProgram(program);
+      return null;
+    }
+    gl.useProgram(program);
+    const buffer = gl.createBuffer();
+    if (!buffer) {
+      gl.deleteProgram(program);
+      return null;
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const position = gl.getAttribLocation(program, "a_pos");
+    gl.enableVertexAttribArray(position);
+    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+    return {
+      program, buffer,
+      time: gl.getUniformLocation(program, "u_time"),
+      resolution: gl.getUniformLocation(program, "u_res"),
+    };
+  };
 
-  const program = gl.createProgram();
-  if (!program) return () => undefined;
-  gl.attachShader(program, vertex);
-  gl.attachShader(program, fragment);
-  gl.linkProgram(program);
-  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    console.error("Hero background program failed to link", gl.getProgramInfoLog(program));
-    return () => undefined;
-  }
-  gl.useProgram(program);
-
-  const buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  const position = gl.getAttribLocation(program, "a_pos");
-  gl.enableVertexAttribArray(position);
-  gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-
-  const time = gl.getUniformLocation(program, "u_time");
-  const resolution = gl.getUniformLocation(program, "u_res");
+  let resources = createResources();
   let frame = 0;
   let needsResize = true;
-  const isPaused = () => document.hidden || document.documentElement.classList.contains("is-index-open");
+  const isPaused = () => !resources || gl.isContextLost() || document.hidden || document.documentElement.classList.contains("is-index-open");
 
   const resize = () => {
+    if (!resources) return;
     const dprLimit = window.innerWidth <= 680 ? 1.25 : 1.5;
     const dpr = Math.min(window.devicePixelRatio || 1, dprLimit);
     const width = Math.round(canvas.clientWidth * dpr);
@@ -211,15 +227,17 @@ export function initSiteBackground(root: ParentNode = document): () => void {
     if (canvas.width !== width || canvas.height !== height) {
       canvas.width = width;
       canvas.height = height;
-      gl.viewport(0, 0, width, height);
-      gl.uniform2f(resolution, width, height);
     }
+    // Restoration resets uniforms and viewport even if the canvas size is unchanged.
+    gl.viewport(0, 0, width, height);
+    gl.uniform2f(resources.resolution, width, height);
     needsResize = false;
   };
 
   const draw = (now = 0) => {
+    if (!resources || gl.isContextLost()) return;
     if (needsResize) resize();
-    gl.uniform1f(time, !animated || reducedMotion.matches ? 0 : now * 0.001);
+    gl.uniform1f(resources.time, !animated || reducedMotion.matches ? 0 : now * 0.001);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   };
 
@@ -254,6 +272,18 @@ export function initSiteBackground(root: ParentNode = document): () => void {
     stop();
     start();
   };
+  const handleContextLost = (event: Event) => {
+    event.preventDefault();
+    stop();
+    resources = null;
+  };
+  const handleContextRestored = () => {
+    resources = createResources();
+    needsResize = true;
+    start();
+  };
+  canvas.addEventListener("webglcontextlost", handleContextLost);
+  canvas.addEventListener("webglcontextrestored", handleContextRestored);
   window.addEventListener("resize", handleResize, { passive: true });
   document.addEventListener("visibilitychange", handleVisibility);
   reducedMotion.addEventListener("change", handleMotionChange);
@@ -267,10 +297,12 @@ export function initSiteBackground(root: ParentNode = document): () => void {
     window.removeEventListener("resize", handleResize);
     document.removeEventListener("visibilitychange", handleVisibility);
     reducedMotion.removeEventListener("change", handleMotionChange);
+    canvas.removeEventListener("webglcontextlost", handleContextLost);
+    canvas.removeEventListener("webglcontextrestored", handleContextRestored);
     indexObserver.disconnect();
-    gl.deleteBuffer(buffer);
-    gl.deleteProgram(program);
-    gl.deleteShader(vertex);
-    gl.deleteShader(fragment);
+    if (resources) {
+      gl.deleteBuffer(resources.buffer);
+      gl.deleteProgram(resources.program);
+    }
   };
 }

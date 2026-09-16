@@ -39,6 +39,11 @@ const initial = curationObjects[0];
       <div class="artifact-viewport__grid" aria-hidden="true"></div>
       <p class="artifact-viewport__status"><span></span> LIVE MODEL</p>
 
+      <div class="artifact-image-error" data-image-error hidden>
+        <p role="status">Image unavailable.</p>
+        <button type="button" data-image-retry>Retry image</button>
+      </div>
+
       <div class="artifact-object" data-artifact-object style={`--artifact-ratio: ${initial.ratio}`}>
         <div class="artifact-object__face artifact-object__face--front">
           <img data-artifact-image src={initial.image} alt={initial.alt} width="2400" height="1394" decoding="async" fetchpriority="high" />

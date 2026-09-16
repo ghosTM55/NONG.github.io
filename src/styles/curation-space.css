@@ -135,6 +135,10 @@
   animation: space-intro-in 1.8s cubic-bezier(.22,1,.36,1) both;
 }
 
+.space-experience[data-state="unavailable"] .space-intro__image {
+  background: url("/assets/curation-space/pavilion-fallback.jpg") center / cover no-repeat;
+}
+
 .space-intro__shade {
   position: absolute;
   inset: 0;
@@ -471,7 +475,7 @@
 
 .space-mobile-controls { display: none; }
 
-.space-experience[data-webgl="unavailable"]::after {
+.space-fallback {
   position: absolute;
   z-index: 50;
   right: 24px;
@@ -480,9 +484,12 @@
   padding: 12px 14px;
   border: 1px solid var(--line);
   background: rgb(13 16 13 / .88);
-  content: "当前浏览器无法启动实时三维场景，已显示建筑效果图。";
   font: 10px/1.5 "PingFang SC", sans-serif;
 }
+
+.space-fallback p { margin: 0; }
+.space-fallback button { margin-top: 10px; padding: 6px 12px; border: 1px solid var(--line); background: transparent; color: var(--paper); cursor: pointer; }
+.space-enter:disabled { cursor: default; opacity: .5; }
 
 @keyframes space-intro-in { from { opacity: .4; } to { opacity: 1; } }
 @keyframes marker-pulse { 0% { opacity: .65; transform: scale(.65); } 75%,100% { opacity: 0; transform: scale(1.35); } }

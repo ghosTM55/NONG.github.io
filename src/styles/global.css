@@ -240,6 +240,7 @@ a:focus-visible {
 }
 
 .masthead__utilities {
+  position: relative;
   grid-column: 3;
   grid-row: 1;
   justify-self: end;

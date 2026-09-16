@@ -9,7 +9,8 @@ export function initIndexPanel(
   const surface = panel?.querySelector<HTMLElement>(".index-panel__surface");
   const navTrigger = root.querySelector<HTMLButtonElement>("[data-index-nav-trigger]");
   const main = root.querySelector<HTMLElement>("main");
-  if (!triggers.length || !panel || !surface || !navTrigger || !main) {
+  const dialog = root.querySelector<HTMLElement>("[data-index-dialog]");
+  if (!triggers.length || !panel || !surface || !navTrigger || !main || !dialog) {
     return () => undefined;
   }
 
@@ -77,24 +78,29 @@ export function initIndexPanel(
 
   const open = (event: Event) => {
     const source = event.currentTarget as HTMLButtonElement;
-    const openedWithKeyboard = event instanceof MouseEvent && event.detail === 0;
     returnFocusTrigger = source;
     closeLanguageMenus(false);
     panel.removeAttribute("inert");
     panel.setAttribute("aria-hidden", "false");
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-label", "Index");
     triggers.forEach((trigger) => {
       trigger.setAttribute("aria-expanded", "true");
       trigger.setAttribute("aria-label", "Close index");
     });
     main.setAttribute("inert", "");
     eventRoot.documentElement.classList.add("is-index-open");
-    if (openedWithKeyboard) navTrigger.focus({ preventScroll: true });
+    navTrigger.focus({ preventScroll: true });
     handleMediaPreferenceChange();
   };
 
   const close = (returnFocus = true) => {
     stopAllVideos();
     panel.setAttribute("aria-hidden", "true");
+    dialog.removeAttribute("role");
+    dialog.removeAttribute("aria-modal");
+    dialog.removeAttribute("aria-label");
     triggers.forEach((trigger) => {
       trigger.setAttribute("aria-expanded", "false");
       trigger.setAttribute("aria-label", trigger.dataset.closedLabel ?? "Open index");
@@ -106,9 +112,24 @@ export function initIndexPanel(
   };
 
   const handlePanelKeydown = (event: KeyboardEvent) => {
-    if (!event.defaultPrevented && event.key === "Escape" && panel.getAttribute("aria-hidden") === "false") {
+    if (event.defaultPrevented || panel.getAttribute("aria-hidden") !== "false") return;
+    if (event.key === "Escape") {
       event.preventDefault();
       close();
+    } else if (event.key === "Tab") {
+      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not(:disabled), [tabindex="0"]',
+      )).filter((element) => !element.closest("[inert]") && element.getClientRects().length > 0);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = eventRoot.activeElement;
+      if (event.shiftKey && (active === first || !dialog.contains(active))) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && (active === last || !dialog.contains(active))) {
+        event.preventDefault();
+        first?.focus();
+      }
     }
   };
 
@@ -127,7 +148,6 @@ export function initIndexPanel(
 
   const handleTriggerClick = (event: Event) => {
     if (panel.getAttribute("aria-hidden") === "false") {
-      returnFocusTrigger = event.currentTarget as HTMLButtonElement;
       close();
     } else {
       open(event);

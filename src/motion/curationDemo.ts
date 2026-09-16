@@ -32,6 +32,7 @@ function initCurationDemo(root: HTMLElement) {
   const workspace = root.querySelector<HTMLElement>(".artifact-workspace");
   const dock = root.querySelector<HTMLElement>("[data-collection-dock]");
   const catalog = root.querySelector<HTMLElement>("[data-collection-catalog]");
+  const imageError = root.querySelector<HTMLElement>("[data-image-error]");
   if (!viewport || !artifact || !image || !zoomOutput || !note || !noteNumber || !noteTitle || !noteCopy) return;
 
   let objects: DemoObject[] = [];
@@ -50,6 +51,7 @@ function initCurationDemo(root: HTMLElement) {
   let lastX = 0;
   let lastY = 0;
   let noteTimer = 0;
+  let imageTimer = 0;
   let currentPage = 1;
   let railStart = 0;
   let catalogExpanded = false;
@@ -114,21 +116,39 @@ function initCurationDemo(root: HTMLElement) {
     });
   };
 
+  const settleImage = (loaded: boolean) => {
+    if (image.getAttribute("src") !== objects[activeIndex]?.image) return;
+    image.style.opacity = loaded ? "1" : "0";
+    if (imageError) imageError.hidden = loaded;
+    artifact.inert = !loaded;
+    artifact.style.visibility = loaded ? "" : "hidden";
+  };
+  image.addEventListener("load", () => settleImage(image.naturalWidth > 0));
+  image.addEventListener("error", () => settleImage(false));
+
+  const loadSelectedImage = () => {
+    window.clearTimeout(imageTimer);
+    const object = objects[activeIndex];
+    if (!object) return;
+    if (imageError) imageError.hidden = true;
+    image.style.opacity = "0";
+    imageTimer = window.setTimeout(() => {
+      image.alt = object.alt;
+      artifact.style.setProperty("--artifact-ratio", String(object.ratio));
+      image.src = object.image;
+      if (image.complete) settleImage(image.naturalWidth > 0);
+    }, 180);
+  };
+  root.querySelector("[data-image-retry]")?.addEventListener("click", loadSelectedImage);
+  if (image.complete) settleImage(image.naturalWidth > 0);
+
   const selectObject = (index: number) => {
     const object = objects[index];
     if (!object) return;
     setRailWindow(Math.floor(index / 5) * 5);
     if (index === activeIndex) return;
     activeIndex = index;
-    image.style.opacity = "0";
-
-    window.setTimeout(() => {
-      image.src = object.image;
-      image.alt = object.alt;
-      artifact.style.setProperty("--artifact-ratio", String(object.ratio));
-      image.addEventListener("load", () => { image.style.opacity = "1"; }, { once: true });
-      if (image.complete) image.style.opacity = "1";
-    }, 180);
+    loadSelectedImage();
 
     setText("[data-object-number]", String(index + 1).padStart(2, "0"));
     setText("[data-object-title]", object.title);

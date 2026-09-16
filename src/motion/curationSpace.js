@@ -20,6 +20,16 @@ if (root) {
   const scrim = root.querySelector("[data-detail-scrim]");
   const indexToggle = root.querySelector("[data-index-toggle]");
   const indexList = root.querySelector("[data-index-list]");
+  const entry = root.querySelector("[data-enter-space]");
+  const fallback = root.querySelector("[data-space-fallback]");
+  const retry = root.querySelector("[data-space-retry]");
+  const showFallback = () => {
+    root.dataset.state = "unavailable";
+    loader?.setAttribute("aria-hidden", "true");
+    if (entry) entry.disabled = true;
+    if (fallback) fallback.hidden = false;
+  };
+  retry?.addEventListener("click", () => window.location.reload());
 
   const state = {
     started: false,
@@ -43,7 +53,7 @@ if (root) {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" });
   } catch {
     root.dataset.webgl = "unavailable";
-    loader?.remove();
+    showFallback();
   }
 
   if (renderer) {
@@ -67,15 +77,33 @@ if (root) {
 
     const anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     const assetManager = new THREE.LoadingManager();
+    let assetFailed = false;
+    const loadingTimeout = window.setTimeout(() => {
+      showFallback();
+      if (retry) retry.hidden = false;
+    }, 15000);
+    assetManager.onError = () => {
+      assetFailed = true;
+      window.clearTimeout(loadingTimeout);
+      showFallback();
+      if (retry) retry.hidden = false;
+    };
     assetManager.onProgress = (_url, loaded, total) => {
       const progress = Math.round((loaded / total) * 100);
       if (loadProgress) loadProgress.textContent = String(progress).padStart(2, "0");
       if (loadBar) loadBar.style.transform = `scaleX(${progress / 100})`;
     };
-    assetManager.onLoad = () => window.setTimeout(() => {
-      root.dataset.state = "ready";
-      loader?.setAttribute("aria-hidden", "true");
-    }, 260);
+    assetManager.onLoad = () => {
+      window.clearTimeout(loadingTimeout);
+      if (assetFailed) return;
+      window.setTimeout(() => {
+        root.dataset.state = "ready";
+        loader?.setAttribute("aria-hidden", "true");
+        if (entry) entry.disabled = false;
+        if (fallback) fallback.hidden = true;
+        if (retry) retry.hidden = true;
+      }, 260);
+    };
     const textureLoader = new THREE.TextureLoader(assetManager);
 
     function loadSurfaceTexture(path, repeatX, repeatY, colorTexture = false) {
@@ -87,15 +115,15 @@ if (root) {
       return texture;
     }
 
-    const plasterDiffuse = loadSurfaceTexture("/assets/curation-space/materials/plaster-diffuse.jpg", 3, 3, true);
+    const plasterDiffuse = loadSurfaceTexture("/assets/curation-space/materials/plaster-diffuse.webp", 3, 3, true);
     const plasterNormal = loadSurfaceTexture("/assets/curation-space/materials/plaster-normal.jpg", 3, 3);
     const plasterRoughness = loadSurfaceTexture("/assets/curation-space/materials/plaster-roughness.jpg", 3, 3);
-    const stoneDiffuse = loadSurfaceTexture("/assets/curation-space/materials/stone-diffuse.jpg", 5, 4, true);
+    const stoneDiffuse = loadSurfaceTexture("/assets/curation-space/materials/stone-diffuse.webp", 5, 4, true);
     const stoneNormal = loadSurfaceTexture("/assets/curation-space/materials/stone-normal.jpg", 5, 4);
     const stoneRoughness = loadSurfaceTexture("/assets/curation-space/materials/stone-roughness.jpg", 5, 4);
-    const woodDiffuse = loadSurfaceTexture("/assets/curation-space/materials/wood-diffuse.jpg", 1.5, 4, true);
+    const woodDiffuse = loadSurfaceTexture("/assets/curation-space/materials/wood-diffuse.webp", 1.5, 4, true);
     const woodNormal = loadSurfaceTexture("/assets/curation-space/materials/wood-normal.jpg", 1.5, 4);
-    const woodRoughness = loadSurfaceTexture("/assets/curation-space/materials/wood-roughness.jpg", 1.5, 4);
+    const woodRoughness = loadSurfaceTexture("/assets/curation-space/materials/wood-roughness.webp", 1.5, 4);
     const waterNormals = loadSurfaceTexture("/assets/curation-space/materials/water-normals.jpg", 4, 3);
 
     const material = {
@@ -360,7 +388,7 @@ if (root) {
 
     function render(now) {
       const delta = Math.min(clock.getDelta(), .07);
-      if (root.inert || document.hidden) {
+      if (root.inert || document.hidden || root.dataset.state === "unavailable") {
         state.keys.clear();
         state.moveButtons.clear();
         requestAnimationFrame(render);
@@ -381,7 +409,7 @@ if (root) {
       } else {
         state.yaw += angleDelta(state.yaw, state.targetYaw) * Math.min(1, delta * 13);
         state.pitch += (state.targetPitch - state.pitch) * Math.min(1, delta * 13);
-        if (state.started && !state.detailOpen) {
+        if (state.started && !state.detailOpen && indexList.hidden) {
           const ahead = Number(state.keys.has("KeyW") || state.keys.has("ArrowUp") || state.moveButtons.has("forward"))
             - Number(state.keys.has("KeyS") || state.keys.has("ArrowDown") || state.moveButtons.has("back"));
           const side = Number(state.keys.has("KeyD") || state.keys.has("ArrowRight") || state.moveButtons.has("right"))
@@ -431,6 +459,7 @@ if (root) {
       state.selected = index;
       state.detailOpen = true;
       state.keys.clear();
+      state.moveButtons.clear();
       fillDetail(index);
       closeIndex();
       root.dataset.detailOpen = "true";
@@ -465,6 +494,8 @@ if (root) {
     root.querySelector("[data-detail-close]")?.addEventListener("click", closeDetail);
     scrim?.addEventListener("click", closeDetail);
     indexToggle?.addEventListener("click", () => {
+      state.keys.clear();
+      state.moveButtons.clear();
       const expanded = indexToggle.getAttribute("aria-expanded") === "true";
       indexToggle.setAttribute("aria-expanded", String(!expanded));
       indexList.hidden = expanded;
@@ -490,6 +521,7 @@ if (root) {
     window.addEventListener("keydown", (event) => {
       if (root.inert || event.defaultPrevented || !root.contains(event.target)) return;
       if (event.key === "Escape") { if (state.detailOpen) closeDetail(); else closeIndex(); }
+      if (!state.started || state.detailOpen || !indexList.hidden || event.target !== canvas) return;
       if (["KeyW", "KeyA", "KeyS", "KeyD", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.code)) {
         event.preventDefault();
         state.keys.add(event.code);
@@ -497,6 +529,8 @@ if (root) {
     });
     window.addEventListener("keyup", (event) => state.keys.delete(event.code));
     const clearMovement = () => { state.keys.clear(); state.moveButtons.clear(); };
+    canvas.addEventListener("blur", clearMovement);
+    window.addEventListener("blur", clearMovement);
     document.addEventListener("visibilitychange", () => { if (document.hidden) clearMovement(); });
     window.addEventListener("pagehide", clearMovement);
 

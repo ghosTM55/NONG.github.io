@@ -118,6 +118,29 @@ Historical, unreferenced public assets are preserved in
 with original paths and checksums. They are excluded from Astro delivery by living
 outside `public/`. Keep `public/sitemap.xml` aligned with published content pages.
 
+### Resilience and delivery assets
+
+Index keeps keyboard focus within its navigation and masthead controls, then
+returns it to the opening button. Email copy feedback is announced outside the
+buttons on both the masthead and Contact page. Hero WebGL resources are rebuilt
+after context restoration without changing shader parameters or frame rate.
+
+The spatial demo keeps scene resources loading before entry. Failed resources or
+a 15-second stall show a static scene capture and a retry control; a stalled load
+that subsequently completes restores entry automatically. Object image failures
+offer retry, and superseded selections cannot leave the new image transparent.
+Browser regressions cover these error paths as well as the existing phone video
+previews.
+
+Spatial material requests total 3,248,008 bytes, down from 3,939,731. The three
+diffuse WebPs use Sharp quality 95 / effort 6 at the original 1024 × 1024 size;
+`wood-roughness.webp` is lossless and pixel-identical to the decoded JPEG. Normal
+maps remain unchanged. Original JPEGs are retained as sources.
+`pavilion-fallback.jpg` is a 1024 × 582 capture of the actual scene canvas,
+exported at JPEG quality 90. `assets/site-share.png` is a 1200 × 630 capture of the
+existing homepage with reduced motion, used for Open Graph and Twitter previews.
+The Astro build hook removes `.DS_Store` files only from generated output.
+
 ### Intro films
 
 The Intro page uses three five-second concept films, separate from the current Index selection:

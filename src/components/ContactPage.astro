@@ -17,19 +17,21 @@ import "../styles/contact-page.css";
       <h2 id="contact-invitation-title">Start a<br />conversation.</h2>
       <p class="contact-invitation__intro">Tell us what you have in mind.<br />An early idea is a good place to start.</p>
       <a class="contact-address" href={`mailto:${contactEmail}`}>{contactEmail}</a>
-      <button
-        class="contact-copy"
-        type="button"
-        aria-label="Copy contact email address"
-        data-copy-email
-        data-email={contactEmail}
-        data-copy-message="Email address copied"
-        data-copy-error="Please select and copy the address above"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v12H8zM4 16V4h12" /></svg>
-        <span>Copy email</span>
-        <span class="contact-copy__feedback" role="status" aria-live="polite" data-copy-email-status></span>
-      </button>
+      <div class="contact-copy-control">
+        <button
+          class="contact-copy"
+          type="button"
+          aria-label="Copy contact email address"
+          data-copy-email
+          data-email={contactEmail}
+          data-copy-message="Email address copied"
+          data-copy-error="Please select and copy the address above"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v12H8zM4 16V4h12" /></svg>
+          <span>Copy email</span>
+        </button>
+        <span class="contact-copy__feedback" role="status" aria-live="polite" aria-atomic="true" data-copy-email-status></span>
+      </div>
       <p class="contact-invitation__note">Not sure where to start?<br />You can always write to us directly.</p>
     </section>
 

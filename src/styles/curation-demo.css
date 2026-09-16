@@ -1489,3 +1489,19 @@
     transition-duration: 0.01ms;
   }
 }
+
+.artifact-image-error {
+  position: absolute;
+  z-index: 5;
+  inset: 40% 16px auto;
+  text-align: center;
+  font-size: 12px;
+}
+
+.artifact-image-error button {
+  padding: 8px 14px;
+  border: 1px solid var(--gold);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+}
