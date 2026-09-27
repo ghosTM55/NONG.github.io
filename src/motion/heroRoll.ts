@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 
 type WordPosition = "previous" | "active" | "next";
 
-const cycleDuration = 4.5;
+const cycleDuration = 4;
 
 export function initHeroRoll(root: ParentNode = document): () => void {
   const stage = root.querySelector<HTMLElement>("[data-hero-roll]");
