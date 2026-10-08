@@ -1,0 +1,13 @@
+---
+import ChapterNavigation from "../components/ChapterNavigation.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+<SiteLayout locale="en" title="Page not found | NONG Studio" description="This page could not be found." noindex>
+  <main class="studio-page">
+    <header class="page-intro">
+      <div><p class="page-eyebrow">ERROR 404</p><h1>NOT FOUND</h1></div>
+      <p class="page-intro__copy">This page does not exist or has moved. Return to the start or open the Index to continue.</p>
+    </header>
+    <ChapterNavigation next={{ title: "Intro", href: "/intro/", context: "Explore our practices", number: "01" }} />
+  </main>
+</SiteLayout>

@@ -95,6 +95,10 @@ white by default; only the current page's chapter is gold. Phone-width mouse
 previews use the same playback and press feedback. Tapping a link navigates
 immediately. Videos load when needed, stop when Index closes or the tab is hidden,
 and retain static posters when reduced motion is enabled or playback is blocked.
+Index posters load after the page's load event during idle time, or immediately
+on hover, keyboard focus or opening Index. Save-Data skips speculative prefetch.
+Queued prefetch work is cancelled when leaving the page and restored when needed
+after back/forward-cache navigation.
 Desktop retains hover and keyboard-focus previews.
 
 ### Fonts and responsive images
@@ -125,7 +129,13 @@ published Index chapters in `src/content/home.ts`, preserving the existing URLs.
 Index keeps keyboard focus within its navigation and masthead controls, then
 returns it to the opening button. Email copy feedback is announced outside the
 buttons on both the masthead and Contact page. Hero WebGL resources are rebuilt
-after context restoration without changing shader parameters or frame rate.
+after context restoration. The landing shader renders at up to 60 fps, preserving
+its time-based animation speed and carrying timing remainder across display
+refresh rates. Reduced motion still renders a static frame.
+
+Unknown URLs use the shared-layout `404.html`, with Landing, Index and Intro
+navigation. Only the error page is marked `noindex` and omits canonical and
+language-alternate links.
 
 The spatial demo keeps scene resources loading before entry. Failed resources or
 a 15-second stall show a static scene capture and a retry control; a stalled load

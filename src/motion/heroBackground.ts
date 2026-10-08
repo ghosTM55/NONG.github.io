@@ -241,8 +241,14 @@ export function initSiteBackground(root: ParentNode = document): () => void {
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   };
 
+  const frameInterval = 1000 / 60;
+  let nextFrameAt = 0;
   const render = (now: number) => {
-    draw(now);
+    if (now >= nextFrameAt - 0.1) {
+      draw(now);
+      // Preserve the cadence on 75/90/144Hz displays; skip missed frames after a pause.
+      nextFrameAt += (Math.floor(Math.max(0, now - nextFrameAt) / frameInterval) + 1) * frameInterval;
+    }
     frame = !animated || reducedMotion.matches || isPaused() ? 0 : window.requestAnimationFrame(render);
   };
 
