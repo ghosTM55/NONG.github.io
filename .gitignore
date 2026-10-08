@@ -7,6 +7,16 @@ dist/
 test-results/
 playwright-report/
 
+# Keep AI instructions, local configuration and review notes on this machine.
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+CLAUDE.local.md
+.agents/
+.claude/
+.codex/
+/REVIEW.md
+
 # Keep design media local; version written notes and archive manifests only.
 design/**
 !design/**/
