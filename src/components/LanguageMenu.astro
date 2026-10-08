@@ -1,5 +1,6 @@
 ---
-import { localizedPath, type Locale } from "../content/home";
+import "../styles/language-menu.css";
+import { localizedPath, unlocalizedPath, type Locale } from "../content/home";
 
 interface Props {
   idPrefix: string;
@@ -9,7 +10,7 @@ interface Props {
 
 const { idPrefix, currentLocale, class: className } = Astro.props;
 const selectedLanguage = currentLocale === "zh" ? "Chinese" : "English";
-const pagePath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
+const pagePath = unlocalizedPath(Astro.url.pathname);
 const languages = [
   { locale: "en", label: "English", code: "EN", lang: "en" },
   { locale: "zh", label: "中文", code: "CN", lang: "zh-CN" },

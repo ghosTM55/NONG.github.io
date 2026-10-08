@@ -8,7 +8,7 @@ const root = document.querySelector("[data-space-root]");
 
 if (root) {
   const canvas = root.querySelector("[data-space-canvas]");
-  const artifacts = JSON.parse(root.dataset.artifacts || "[]");
+  const artifacts = JSON.parse(root.querySelector("[data-space-artifacts]")?.textContent || "[]");
   const markers = [...root.querySelectorAll("[data-space-marker]")];
   const locationEl = root.querySelector("[data-space-location]");
   const loader = root.querySelector("[data-space-loader]");

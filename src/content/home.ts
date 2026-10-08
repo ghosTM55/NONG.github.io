@@ -69,3 +69,8 @@ export const indexItems = [
 export function localizedPath(path: string, locale: Locale): string {
   return locale === "zh" ? `/zh${path}` : path;
 }
+
+/** The locale-independent path of a page, e.g. `/zh/demo/` → `/demo/`. */
+export function unlocalizedPath(path: string): string {
+  return path.replace(/^\/zh(?=\/)/, "");
+}

@@ -2,11 +2,13 @@
 import { spaceArtifacts } from "../content/curationSpace";
 import "../styles/curation-space.css";
 import DemoNav from "./DemoNav.astro";
+import { scriptJson } from "../utils/scriptJson";
 
 const objectTotal = String(spaceArtifacts.length).padStart(2, "0");
 ---
 
-<main class="space-experience" data-space-root data-artifacts={JSON.stringify(spaceArtifacts)} data-state="loading">
+<main class="space-experience" data-space-root data-state="loading">
+  <script type="application/json" data-space-artifacts is:inline set:html={scriptJson(spaceArtifacts)} />
   <canvas class="space-canvas" data-space-canvas tabindex="0" aria-label="安徽馆可探索三维空间"></canvas>
   <div class="space-atmosphere" aria-hidden="true"></div>
 

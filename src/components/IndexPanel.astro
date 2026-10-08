@@ -1,9 +1,10 @@
 ---
-import { indexItems, localizedPath, type Locale } from "../content/home";
+import "../styles/index-panel.css";
+import { indexItems, localizedPath, unlocalizedPath, type Locale } from "../content/home";
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
-const currentPath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
+const currentPath = unlocalizedPath(Astro.url.pathname);
 ---
 
 <section
