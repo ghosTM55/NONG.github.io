@@ -24,6 +24,43 @@ export function initIndexPanel(
   const eventRoot = root instanceof Document ? root : (root.ownerDocument ?? document);
   let returnFocusTrigger = triggers[0];
 
+  const posters = Array.from(panel.querySelectorAll<HTMLImageElement | HTMLVideoElement>("[data-index-poster]"));
+  // A restored page may already have fetched its posters.
+  let postersLoaded = posters.every((element) =>
+    element.getAttribute(element instanceof HTMLVideoElement ? "poster" : "src") === element.dataset.indexPoster,
+  );
+  let posterIdle: number | undefined;
+  let posterTimer: number | undefined;
+  const cancelPosterPrefetch = () => {
+    window.removeEventListener("load", schedulePosters);
+    if (posterIdle !== undefined) window.cancelIdleCallback(posterIdle);
+    if (posterTimer !== undefined) window.clearTimeout(posterTimer);
+    posterIdle = posterTimer = undefined;
+  };
+  const loadPosters = () => {
+    cancelPosterPrefetch();
+    if (postersLoaded) return;
+    postersLoaded = true;
+    posters.forEach((element) => {
+      const source = element.dataset.indexPoster;
+      if (!source) return;
+      if (element instanceof HTMLVideoElement) element.poster = source;
+      else element.src = source;
+    });
+  };
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+  const schedulePosters = () => {
+    if (saveData || postersLoaded) return;
+    // Keep hidden Index imagery out of the page's initial loading work.
+    if (typeof window.requestIdleCallback === "function") {
+      posterIdle = window.requestIdleCallback(loadPosters, { timeout: 4000 });
+    } else {
+      posterTimer = window.setTimeout(loadPosters, 1500);
+    }
+  };
+  if (eventRoot.readyState === "complete") schedulePosters();
+  else window.addEventListener("load", schedulePosters, { once: true });
+
   const canPlay = () => panel.getAttribute("aria-hidden") === "false" && !eventRoot.hidden && !reducedMotion.matches;
 
   const stopVideo = (video: HTMLVideoElement) => {
@@ -77,6 +114,7 @@ export function initIndexPanel(
   };
 
   const open = (event: Event) => {
+    loadPosters();
     const source = event.currentTarget as HTMLButtonElement;
     returnFocusTrigger = source;
     closeLanguageMenus(false);
@@ -184,7 +222,11 @@ export function initIndexPanel(
   links.forEach((link) => {
     link.addEventListener("click", handleIndexLink);
   });
-  triggers.forEach((trigger) => trigger.addEventListener("click", handleTriggerClick));
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", handleTriggerClick);
+    trigger.addEventListener("pointerenter", loadPosters, { once: true });
+    trigger.addEventListener("focus", loadPosters, { once: true });
+  });
   eventRoot.addEventListener("keydown", handlePanelKeydown);
   eventRoot.addEventListener("pointerdown", handleOutsidePointerdown);
   eventRoot.addEventListener("visibilitychange", handleMediaPreferenceChange);
@@ -192,11 +234,16 @@ export function initIndexPanel(
   reducedMotion.addEventListener("change", handleMediaPreferenceChange);
 
   return () => {
+    cancelPosterPrefetch();
     close(false);
     links.forEach((link) => {
       link.removeEventListener("click", handleIndexLink);
     });
-    triggers.forEach((trigger) => trigger.removeEventListener("click", handleTriggerClick));
+    triggers.forEach((trigger) => {
+      trigger.removeEventListener("click", handleTriggerClick);
+      trigger.removeEventListener("pointerenter", loadPosters);
+      trigger.removeEventListener("focus", loadPosters);
+    });
     eventRoot.removeEventListener("keydown", handlePanelKeydown);
     eventRoot.removeEventListener("pointerdown", handleOutsidePointerdown);
     eventRoot.removeEventListener("visibilitychange", handleMediaPreferenceChange);

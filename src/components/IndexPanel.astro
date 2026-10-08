@@ -37,11 +37,10 @@ const currentPath = unlocalizedPath(Astro.url.pathname);
                 >
                   <span class={`index-list__media index-list__media--${index + 1}`} aria-hidden="true">
                     <img
-                      src={item.imageSrc}
+                      data-index-poster={item.imageSrc}
                       alt=""
                       width="720"
                       height="1280"
-                      loading="eager"
                       decoding="async"
                       fetchpriority="low"
                     />
@@ -51,7 +50,7 @@ const currentPath = unlocalizedPath(Astro.url.pathname);
                       loop={item.loop}
                       playsinline
                       preload="none"
-                      poster={item.imageSrc}
+                      data-index-poster={item.imageSrc}
                       width="720"
                       height="1280"
                       data-index-video
