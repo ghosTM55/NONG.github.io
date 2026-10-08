@@ -1,10 +1,11 @@
 ---
 import "../styles/global.css";
-import "../styles/site-pages.css";
-import type { Locale } from "../content/home";
+import { unlocalizedPath, type Locale } from "../content/home";
 import Masthead from "../components/Masthead.astro";
 import IndexPanel from "../components/IndexPanel.astro";
 import SiteBackground from "../components/SiteBackground.astro";
+// After the masthead and Index styles, which its content-page rules override.
+import "../styles/site-pages.css";
 
 interface Props {
   locale: Locale;
@@ -20,7 +21,7 @@ const {
   bodyClass,
 } = Astro.props;
 const htmlLang = locale === "zh" ? "zh-CN" : "en";
-const pagePath = Astro.url.pathname.replace(/^\/zh(?=\/)/, "");
+const pagePath = unlocalizedPath(Astro.url.pathname);
 const isLanding = pagePath === "/";
 const shareImage = new URL("/assets/site-share.png", Astro.site);
 const flow = pagePath === "/intro/" || pagePath === "/contact/" ? "intro" : pagePath === "/curation/" || pagePath === "/partnerships/" ? "curation" : undefined;

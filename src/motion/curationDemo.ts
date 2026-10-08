@@ -1,22 +1,4 @@
-interface DemoObject {
-  id: string;
-  title: string;
-  subtitle: string;
-  date: string;
-  origin: string;
-  material: string;
-  dimensions: string;
-  collection: string;
-  accession: string;
-  image: string;
-  alt: string;
-  source: string;
-  license: string;
-  ratio: number;
-  notes: Array<{ title: string; description: string }>;
-  story: string;
-  recordStatus?: "verified" | "demo";
-}
+import type { CurationObject } from "../content/curation";
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -35,9 +17,9 @@ function initCurationDemo(root: HTMLElement) {
   const imageError = root.querySelector<HTMLElement>("[data-image-error]");
   if (!viewport || !artifact || !image || !zoomOutput || !note || !noteNumber || !noteTitle || !noteCopy) return;
 
-  let objects: DemoObject[] = [];
+  let objects: CurationObject[] = [];
   try {
-    objects = JSON.parse(root.dataset.objects ?? "[]") as DemoObject[];
+    objects = JSON.parse(root.querySelector("[data-curation-objects]")?.textContent ?? "[]") as CurationObject[];
   } catch {
     return;
   }

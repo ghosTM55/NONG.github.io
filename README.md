@@ -100,13 +100,14 @@ Desktop retains hover and keyboard-focus previews.
 ### Fonts and responsive images
 
 The site preloads the local Tektur WOFF2 font (60,396 bytes). It preserves all 1,129
-glyphs and both original variable axes. The original TTF and OFL license remain in
-`public/fonts/Tektur/`. To regenerate the WOFF2 in a temporary Python environment:
+glyphs and both original variable axes. Only the WOFF2 and its OFL license are
+published from `public/fonts/Tektur/`; the variable and static TTF sources live in
+`fonts/Tektur/`, outside Astro delivery. To regenerate the WOFF2 in a temporary Python environment:
 
 ```bash
 python3 -m venv /tmp/nong-font-tools
 /tmp/nong-font-tools/bin/python -m pip install 'fonttools[woff]==4.65.0'
-/tmp/nong-font-tools/bin/fonttools ttLib.woff2 compress 'public/fonts/Tektur/Tektur-VariableFont_wdth,wght.ttf'
+/tmp/nong-font-tools/bin/fonttools ttLib.woff2 compress -o 'public/fonts/Tektur/Tektur-VariableFont_wdth,wght.woff2' 'fonts/Tektur/Tektur-VariableFont_wdth,wght.ttf'
 ```
 
 Curation provides 600/900/1200-pixel WebP candidates. The original 1200-pixel files
@@ -116,7 +117,8 @@ WebP quality 85. `srcset` and `sizes` let browsers select for layout width and D
 Historical, unreferenced public assets are preserved in
 [`design/asset-archive/2026-09-15/`](design/asset-archive/2026-09-15/README.md),
 with original paths and checksums. They are excluded from Astro delivery by living
-outside `public/`. Keep `public/sitemap.xml` aligned with published content pages.
+outside `public/`. `src/pages/sitemap.xml.ts` generates the sitemap from the
+published Index chapters in `src/content/home.ts`, preserving the existing URLs.
 
 ### Resilience and delivery assets
 

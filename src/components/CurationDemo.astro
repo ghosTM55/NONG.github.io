@@ -2,11 +2,13 @@
 import { curationObjects } from "../content/curation";
 import "../styles/curation-demo.css";
 import DemoNav from "./DemoNav.astro";
+import { scriptJson } from "../utils/scriptJson";
 
 const initial = curationObjects[0];
 ---
 
-<main class="curation-demo" data-curation-demo data-objects={JSON.stringify(curationObjects)}>
+<main class="curation-demo" data-curation-demo>
+  <script type="application/json" data-curation-objects is:inline set:html={scriptJson(curationObjects)} />
   <DemoNav active="objects" />
 
   <section class="artifact-workspace" aria-labelledby="object-title">
