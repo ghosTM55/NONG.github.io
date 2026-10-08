@@ -6,3 +6,9 @@ dist/
 .gstack/
 test-results/
 playwright-report/
+
+# Keep design media local; version written notes and archive manifests only.
+design/**
+!design/**/
+!design/**/*.md
+!design/asset-archive/*/manifest.json

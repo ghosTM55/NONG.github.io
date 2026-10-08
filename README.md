@@ -118,7 +118,12 @@ Curation provides 600/900/1200-pixel WebP candidates. The original 1200-pixel fi
 are unchanged; the smaller candidates use Sharp 0.35.4, a width-only resize and
 WebP quality 85. `srcset` and `sizes` let browsers select for layout width and DPR.
 
-Historical, unreferenced public assets are preserved in
+`design/` contains local source media, review captures and archived assets; the
+build does not read it. Only Markdown notes and archive manifests remain tracked.
+Existing media stays on disk and in earlier Git history. Back up local media
+before switching or merging older revisions that still track those files.
+
+Historical, unreferenced public assets are preserved locally in
 [`design/asset-archive/2026-09-15/`](design/asset-archive/2026-09-15/README.md),
 with original paths and checksums. They are excluded from Astro delivery by living
 outside `public/`. `src/pages/sitemap.xml.ts` generates the sitemap from the
