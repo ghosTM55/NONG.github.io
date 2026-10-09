@@ -17,8 +17,10 @@ CLAUDE.local.md
 .codex/
 /REVIEW.md
 
-# Keep design media local; version written notes and archive manifests only.
-design/**
-!design/**/
-!design/**/*.md
-!design/asset-archive/*/manifest.json
+# Keep internal product/design notes, prompts and asset archives local.
+/PRODUCT.md
+/design/
+
+# Keep local environment values out of the public repository.
+.env
+.env.*
